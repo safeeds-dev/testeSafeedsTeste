@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ISO15745Profile xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\xsd\GSDML-DeviceProfile-V2.32.xsd">
+	<ProfileHeader>
+		<ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+		<ProfileRevision>1.00</ProfileRevision>
+		<ProfileName>Device Profile for PROFINET Devices</ProfileName>
+		<ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>4</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>GSDML</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity VendorID="0x0143" DeviceID="0x0002">
+			<InfoText TextId="T_ID_DEV_DESCRIPTION"/>
+			<VendorName Value="ProMinent"/>
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Family MainFamily="General" ProductFamily="GMXa-2-Port"/>
+		</DeviceFunction>
+		<ApplicationProcess>
+
+<!-- ============================================================================================ -->
+<!--   List of Device Access Points (DAP)                                                         -->
+<!-- ============================================================================================ -->
+			<DeviceAccessPointList>
+				<DeviceAccessPointItem ID="DAP" PhysicalSlots="0..64" ModuleIdentNumber="0x80010000" MinDeviceInterval="8" ImplementationType="NP40" DNS_CompatibleName="GMXa-PN-TWO-Port" FixedInSlots="0" ObjectUUID_LocalIndex="1" DeviceAccessSupported="true" WebServer="http:///" MultipleWriteSupported="true" NameOfStationNotTransferable="true" ParameterizationSpeedupSupported="true" LLDP_NoD_Supported="true" CheckDeviceID_Allowed="true" PowerOnToCommReady="6000" ResetToFactoryModes="2 8" RequiredSchemaVersion="V2.25" PNIO_Version="V2.31">
+
+					<ModuleInfo>
+						<Name TextId="T_ID_DAP_V2"/>
+						<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+						<VendorName Value="Prominent"/>
+						<OrderNumber Value="GMXa-2-Port"/>
+						<!--HardwareRelease Value="2"/> <SoftwareRelease Value="V2.21"/-->
+					</ModuleInfo>
+
+					<CertificationInfo NetloadClass="III" ApplicationClass="" ConformanceClass="C"/>
+
+					<SubslotList>
+						<SubslotItem SubslotNumber="32768" TextId="T_ID_SS_INTERFACE"/>
+						<SubslotItem SubslotNumber="32769" TextId="T_ID_SS_PORT1"/>
+						<SubslotItem SubslotNumber="32770" TextId="T_ID_SS_PORT2"/>
+					</SubslotList>
+
+					<IOConfigData MaxOutputLength="1440" MaxInputLength="1440"/>
+					
+					<UseableModules>
+						<ModuleItemRef ModuleItemTarget="ID_STATUS" UsedInSlots="1" AllowedInSlots="1"/>
+						<ModuleItemRef ModuleItemTarget="ID_CONTROL" UsedInSlots="2" AllowedInSlots="2"/>
+						<ModuleItemRef ModuleItemTarget="ID_MODE" UsedInSlots="3" AllowedInSlots="3"/>
+						<ModuleItemRef ModuleItemTarget="ID_FLOW_RATE" UsedInSlots="4" AllowedInSlots="4"/>
+						<ModuleItemRef ModuleItemTarget="ID_MAX_FLOW_RATE" UsedInSlots="5" AllowedInSlots="5"/>
+						<ModuleItemRef ModuleItemTarget="ID_BATCH" UsedInSlots="6" AllowedInSlots="6"/>
+						<ModuleItemRef ModuleItemTarget="ID_CONTACT" UsedInSlots="7" AllowedInSlots="7"/>
+						<ModuleItemRef ModuleItemTarget="ID_CONCENTRATION" UsedInSlots="8" AllowedInSlots="8"/>
+						<ModuleItemRef ModuleItemTarget="ID_METERING_MONITOR" UsedInSlots="9" AllowedInSlots="9"/>
+						<ModuleItemRef ModuleItemTarget="ID_ERROR_WARNING" UsedInSlots="10" AllowedInSlots="10"/>
+						<ModuleItemRef ModuleItemTarget="ID_STROKES_QUANTITY" UsedInSlots="11" AllowedInSlots="11"/>
+					</UseableModules>
+
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="DAP" IM5_Supported="true" SubmoduleIdentNumber="0x00000001" Writeable_IM_Records="1 2 3" MayIssueProcessAlarm="false">
+							<IOData/>
+							<ModuleInfo>
+								<Name TextId="T_ID_DAP_V2"/>
+								<InfoText TextId="T_ID_V2_DEV_DESCRIPTION"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+					<SystemDefinedSubmoduleList>
+						<InterfaceSubmoduleItem ID="Interface" SubslotNumber="32768" SubmoduleIdentNumber="0x00000002" SupportedRT_Classes="RT_CLASS_1;RT_CLASS_3" TextId="T_ID_INTERFACE" SupportedProtocols="SNMP;LLDP" SupportedMibs="MIB2" DCP_HelloSupported="false" PTP_BoundarySupported="true" DCP_BoundarySupported="true" DelayMeasurementSupported="true">
+							<RT_Class3Properties StartupMode="Legacy;Advanced" ForwardingMode="Relative" MaxNumberIR_FrameData="128" MaxBridgeDelay="2760"/>
+							<SynchronisationMode SupportedRole="SyncSlave" T_PLL_MAX="1000" SupportedSyncProtocols="PTCP"/>
+							<ApplicationRelations StartupMode="Legacy;Advanced">
+								<TimingProperties SendClock="8 16 32 64 128" ReductionRatio="1 2 4 8 16 32 64 128 256 512"/>
+								<RT_Class3TimingProperties SendClock="8 16 32 64 128" ReductionRatio="1 2 4 8 16"/>
+							</ApplicationRelations>
+							<MediaRedundancy SupportedRole="Client"/>
+						</InterfaceSubmoduleItem>
+						<PortSubmoduleItem ID="Port 1" SubslotNumber="32769" SubmoduleIdentNumber="0x00000003" MAUTypes="16" TextId="T_ID_PORT1" MaxPortRxDelay="209" MaxPortTxDelay="129" PortDeactivationSupported="true" LinkStateDiagnosisCapability="Up+Down" SupportsRingportConfig="true" IsDefaultRingport="true" CheckMAUTypeSupported="true" CheckMAUTypeDifferenceSupported="true">
+							<MAUTypeList>
+								<MAUTypeItem Value="16" AdjustSupported="true"/>
+							</MAUTypeList>
+						</PortSubmoduleItem>
+						<PortSubmoduleItem ID="Port 2" SubslotNumber="32770" SubmoduleIdentNumber="0x00000003" MAUTypes="16" TextId="T_ID_PORT2" MaxPortRxDelay="209" MaxPortTxDelay="129" PortDeactivationSupported="true" LinkStateDiagnosisCapability="Up+Down" SupportsRingportConfig="true" IsDefaultRingport="true" CheckMAUTypeSupported="true" CheckMAUTypeDifferenceSupported="true">
+							<MAUTypeList>
+								<MAUTypeItem Value="16" AdjustSupported="true"/>
+							</MAUTypeList>
+						</PortSubmoduleItem>
+					</SystemDefinedSubmoduleList>
+
+					<Graphics>
+						<GraphicItemRef Type="DeviceSymbol" GraphicItemTarget="1"/>
+					</Graphics>
+					
+				</DeviceAccessPointItem>
+
+			</DeviceAccessPointList>
+
+<!-- List of modules -->
+
+			<ModuleList>
+
+				<!-- Status -->
+				<ModuleItem ID="ID_STATUS" ModuleIdentNumber="0x00000001">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_STATUS"/>
+						<InfoText TextId="T_ID_INFO_TEXT_STATUS"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_STATUS" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Unsigned32" TextId="T_ID_STATUS"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_STATUS"/>
+								<InfoText TextId="T_ID_STATUS"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>						
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Control -->
+				<ModuleItem ID="ID_CONTROL" ModuleIdentNumber="0x00000002">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_CONTROL"/>
+						<InfoText TextId="T_ID_INFO_TEXT_CONTROL"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_START_STOP" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_START_STOP"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_START_STOP"/>
+								<InfoText TextId="T_ID_START_STOP"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_RESET" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_RESET"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_RESET"/>
+								<InfoText TextId="T_ID_RESET"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Mode -->
+				<ModuleItem ID="ID_MODE" ModuleIdentNumber="0x00000003">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_MODE"/>
+						<InfoText TextId="T_ID_INFO_TEXT_MODE"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_TARGET_MODE" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_TARGET_MODE"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_TARGET_MODE"/>
+								<InfoText TextId="T_ID_TARGET_MODE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_OPERATING_MODE" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_OPERATING_MODE"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_OPERATING_MODE"/>
+								<InfoText TextId="T_ID_OPERATING_MODE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Flow Rate -->
+				<ModuleItem ID="ID_FLOW_RATE" ModuleIdentNumber="0x00000004">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_FLOW_RATE"/>
+						<InfoText TextId="T_ID_INFO_TEXT_FLOW_RATE"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_NOMINAL_FLOW_RATE" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_NOMINAL_FLOW_RATE"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_NOMINAL_FLOW_RATE"/>
+								<InfoText TextId="T_ID_NOMINAL_FLOW_RATE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_ACTUAL_FLOW_RATE" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_ACTUAL_FLOW_RATE"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_ACTUAL_FLOW_RATE"/>
+								<InfoText TextId="T_ID_ACTUAL_FLOW_RATE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Max. Flow Rate -->
+				<ModuleItem ID="ID_MAX_FLOW_RATE" ModuleIdentNumber="0x00000005">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_MAX_FLOW_RATE"/>
+						<InfoText TextId="T_ID_INFO_TEXT_MAX_FLOW_RATE"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_MAX_FLOW_RATE" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_MAX_FLOW_RATE"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_MAX_FLOW_RATE"/>
+								<InfoText TextId="T_ID_MAX_FLOW_RATE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Batch -->
+				<ModuleItem ID="ID_BATCH" ModuleIdentNumber="0x00000006">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_BATCH"/>
+						<InfoText TextId="T_ID_INFO_TEXT_BATCH"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_BATCH_VOLUME" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_BATCH_VOLUME"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_BATCH_VOLUME"/>
+								<InfoText TextId="T_ID_BATCH_VOLUME"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_BATCH_TIME" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned16" TextId="T_ID_BATCH_TIME"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_BATCH_TIME"/>
+								<InfoText TextId="T_ID_BATCH_TIME"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_BATCH_START" SubmoduleIdentNumber="0x00000003" FixedInSubslots="3" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_BATCH_START"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_BATCH_START"/>
+								<InfoText TextId="T_ID_BATCH_START"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_BATCH_MEMORY" SubmoduleIdentNumber="0x00000004" FixedInSubslots="4" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_BATCH_MEMORY"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_BATCH_MEMORY"/>
+								<InfoText TextId="T_ID_BATCH_MEMORY"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_REMAINING_VOLUME" SubmoduleIdentNumber="0x00000005" FixedInSubslots="5" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_REMAINING_VOLUME"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_REMAINING_VOLUME"/>
+								<InfoText TextId="T_ID_REMAINING_VOLUME"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>											
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Contact -->
+				<ModuleItem ID="ID_CONTACT" ModuleIdentNumber="0x00000007">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_CONTACT"/>
+						<InfoText TextId="T_ID_INFO_TEXT_CONTACT"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_CONTACT_VOLUME" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_CONTACT_VOLUME"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_CONTACT_VOLUME"/>
+								<InfoText TextId="T_ID_CONTACT_VOLUME"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_CONTACT_MEMORY" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_CONTACT_MEMORY"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_CONTACT_MEMORY"/>
+								<InfoText TextId="T_ID_CONTACT_MEMORY"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Concentration -->
+				<ModuleItem ID="ID_CONCENTRATION" ModuleIdentNumber="0x00000008">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_CONCENTRATION"/>
+						<InfoText TextId="T_ID_INFO_TEXT_CONCENTRATION"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_CONCENTRATION_RATE" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_CONCENTRATION_RATE"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_CONCENTRATION_RATE"/>
+								<InfoText TextId="T_ID_CONCENTRATION_RATE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_ACTUAL_CONCENTRATION" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_ACTUAL_CONCENTRATION"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_ACTUAL_CONCENTRATION"/>
+								<InfoText TextId="T_ID_ACTUAL_CONCENTRATION"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Metering Monitor -->
+				<ModuleItem ID="ID_METERING_MONITOR" ModuleIdentNumber="0x00000009">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_METERING_MONITOR"/>
+						<InfoText TextId="T_ID_INFO_TEXT_METERING_MONITOR"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_METERING_MONITOR" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_METERING_MONITOR"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_METERING_MONITOR"/>
+								<InfoText TextId="T_ID_METERING_MONITOR"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Error/Warning -->
+				<ModuleItem ID="ID_ERROR_WARNING" ModuleIdentNumber="0x0000000A">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_ERROR_WARNING"/>
+						<InfoText TextId="T_ID_INFO_TEXT_ERROR_WARNING"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_ERROR" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Unsigned32" TextId="T_ID_ERROR"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_ERROR"/>
+								<InfoText TextId="T_ID_ERROR"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_WARNING" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Unsigned16" TextId="T_ID_WARNING"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_WARNING"/>
+								<InfoText TextId="T_ID_WARNING"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+
+				<!-- Strokes/Quantity -->
+				<ModuleItem ID="ID_STROKES_QUANTITY" ModuleIdentNumber="0x0000000B">
+					<ModuleInfo CategoryRef="CAT_REF_MODULES">
+						<Name TextId="T_ID_MODULE_NAME_STROKES_QUANTITY"/>
+						<InfoText TextId="T_ID_INFO_TEXT_STROKES_QUANTITY"/>
+					</ModuleInfo>
+					<VirtualSubmoduleList>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_RESET_STROKE_COUNTER" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_RESET_STROKE_COUNTER"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_RESET_STROKE_COUNTER"/>
+								<InfoText TextId="T_ID_RESET_STROKE_COUNTER"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_REST_QUANTITY_COUNTER" SubmoduleIdentNumber="0x00000002" FixedInSubslots="2" MayIssueProcessAlarm="true">
+							<IOData>
+								<Output Consistency="All items consistency">
+									<DataItem DataType="Unsigned8" TextId="T_ID_RESET_QUANTITY_COUNTER"/>
+								</Output>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_RESET_QUANTITY_COUNTER"/>
+								<InfoText TextId="T_ID_RESET_QUANTITY_COUNTER"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_STROKE_COUNTER" SubmoduleIdentNumber="0x00000003" FixedInSubslots="3" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Unsigned32" TextId="T_ID_STROKE_COUNTER"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_STROKE_COUNTER"/>
+								<InfoText TextId="T_ID_STROKE_COUNTER"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_QUANTITY_COUNTER" SubmoduleIdentNumber="0x00000004" FixedInSubslots="4" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_QUANTITY_COUNTER"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_QUANTITY_COUNTER"/>
+								<InfoText TextId="T_ID_QUANTITY_COUNTER"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+						<VirtualSubmoduleItem ID="ID_SUBMOD_LITRES_PER_STROKE" SubmoduleIdentNumber="0x00000005" FixedInSubslots="5" MayIssueProcessAlarm="true">
+							<IOData>
+								<Input Consistency="All items consistency">
+									<DataItem DataType="Float32" TextId="T_ID_LITRES_PER_STROKE"/>
+								</Input>
+							</IOData>
+							<ModuleInfo>
+								<Name TextId="T_ID_LITRES_PER_STROKE"/>
+								<InfoText TextId="T_ID_LITRES_PER_STROKE"/>
+							</ModuleInfo>
+						</VirtualSubmoduleItem>
+					</VirtualSubmoduleList>
+				</ModuleItem>
+				
+			</ModuleList>
+
+<!-- List of values -->
+			<ChannelDiagList>
+				<ChannelDiagItem ErrorType="12755"> 
+					<Name TextId="T_LIMIT_ERROR_WRITE"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="12773"> 
+					<Name TextId="T_LIMIT_ERROR_READ"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13011"> 
+					<Name TextId="T_DATA_SAVED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13029"> 
+					<Name TextId="T_DATA_SAVED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13267"> 
+					<Name TextId="T_NOT_IN_REMOTE"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13285"> 
+					<Name TextId="T_NOT_IN_REMOTE"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13523"> 
+					<Name TextId="T_OPTION_NOT_INSTALLED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13541"> 
+					<Name TextId="T_OPTION_NOT_INSTALLED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13779"> 
+					<Name TextId="T_SERVICE_NOT_DEFINED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="13797"> 
+					<Name TextId="T_SERVICE_NOT_DEFINED"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="14035"> 
+					<Name TextId="T_VALUE_NOT_CHANGABLE"/>
+				</ChannelDiagItem>
+				<ChannelDiagItem ErrorType="14053"> 
+					<Name TextId="T_VALUE_NOT_CHANGABLE"/>
+				</ChannelDiagItem>
+			</ChannelDiagList>
+			
+
+<!-- List of graphics -->
+			<GraphicsList>
+				<GraphicItem ID="1" GraphicFile="GSDML-0143-0002-GMXa-PRT2P"/>
+			</GraphicsList>
+<!-- List of categories -->
+			<CategoryList>
+				<CategoryItem ID="CAT_REF_MODULES" TextId="T_ID_CAT_REF_MODULES"/>
+				<!--<CategoryItem ID="CAT_REF_MIGRATION_DAP" TextId="T_ID_MIGRATION_DAP"/> -->
+			</CategoryList>
+
+<!-- List of texts -->
+			<ExternalTextList>
+				<PrimaryLanguage>
+					<!--Device Access Point information etc -->
+					<Text TextId="T_ID_DEV_DESCRIPTION" Value="ProMinent GMXa PROFINET IO 2-Port"/>
+					<Text TextId="T_ID_V1_DEV_DESCRIPTION" Value="This Device Access Point may be used by IO Controllers that do not support extended PROFINET diagnostics. RT communication is supported"/>
+					<Text TextId="T_ID_V15_DEV_DESCRIPTION" Value="This Device Access Point may be used by IO Controllers that do not support extended PROFINET diagnostics. RT communication is supported"/>
+					<Text TextId="T_ID_V2_DEV_DESCRIPTION" Value="This Device Access Point supports RT communication"/>
+					<Text TextId="T_ID_DAP_V1" Value="RT"/>
+					<Text TextId="T_ID_DAP_V15" Value="RT (FW&gt;=1.13)"/>
+					<Text TextId="T_ID_DAP_V2" Value="RT"/>
+					<Text TextId="T_ID_SS_INTERFACE" Value="X1"/>
+					<Text TextId="T_ID_SS_PORT1" Value="P1"/>
+					<Text TextId="T_ID_SS_PORT2" Value="P2"/>
+					<Text TextId="T_ID_DAP_INTERFACE_MODULE" Value="Interface"/>
+					<Text TextId="T_ID_PORT1" Value="Port 1"/>
+					<Text TextId="T_ID_PORT2" Value="Port 2"/>
+					<Text TextId="T_ID_INTERFACE" Value="X1"/>
+
+					<!--Module category-->
+					<Text TextId="T_ID_CAT_REF_MODULES" Value="Input/Output"/>
+					<!--Text TextId="T_ID_MIGRATION_DAP" Value="Migration"/-->
+
+					<!-- Vendor module texts -->					
+					<Text TextId="T_ID_MODULE_NAME_STATUS" Value="Status Device"/>
+					<Text TextId="T_ID_INFO_TEXT_STATUS" Value="Status Device"/>
+					<Text TextId="T_ID_STATUS" Value="Status Device"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_CONTROL" Value="Device Control"/>
+					<Text TextId="T_ID_INFO_TEXT_CONTROL" Value="Device Control"/>
+					<Text TextId="T_ID_START_STOP" Value="Start/Stop"/>
+					<Text TextId="T_ID_RESET" Value="Reset"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_MODE" Value="Mode"/>
+					<Text TextId="T_ID_INFO_TEXT_MODE" Value="Mode"/>
+					<Text TextId="T_ID_TARGET_MODE" Value="Target Mode"/>
+					<Text TextId="T_ID_OPERATING_MODE" Value="Operating Mode"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_FLOW_RATE" Value="Flow Rate"/>
+					<Text TextId="T_ID_INFO_TEXT_FLOW_RATE" Value="Flow Rate"/>
+					<Text TextId="T_ID_NOMINAL_FLOW_RATE" Value="Nominal Flow Rate"/>
+					<Text TextId="T_ID_ACTUAL_FLOW_RATE" Value="Actual Flow Rate"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_MAX_FLOW_RATE" Value="Maximal Flow Rate"/>
+					<Text TextId="T_ID_INFO_TEXT_MAX_FLOW_RATE" Value="Maximal Flow Rate"/>
+					<Text TextId="T_ID_MAX_FLOW_RATE" Value="Maximal Flow Rate"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_BATCH" Value="Batch Mode"/>
+					<Text TextId="T_ID_INFO_TEXT_BATCH" Value="Batch Mode"/>
+					<Text TextId="T_ID_BATCH_VOLUME" Value="Batch Volume"/>
+					<Text TextId="T_ID_BATCH_TIME" Value="Batch Time"/>
+					<Text TextId="T_ID_BATCH_START" Value="Batch Start"/>
+					<Text TextId="T_ID_BATCH_MEMORY" Value="Batch Memory"/>
+					<Text TextId="T_ID_REMAINING_VOLUME" Value="Remaining Volume"/>
+
+					<Text TextId="T_ID_MODULE_NAME_CONTACT" Value="Contact Mode"/>
+					<Text TextId="T_ID_INFO_TEXT_CONTACT" Value="Contact Mode"/>
+					<Text TextId="T_ID_CONTACT_VOLUME" Value="Contact Volume"/>
+					<Text TextId="T_ID_CONTACT_MEMORY" Value="Contact Memory"/>
+
+					<Text TextId="T_ID_MODULE_NAME_CONCENTRATION" Value="Concentration"/>
+					<Text TextId="T_ID_INFO_TEXT_CONCENTRATION" Value="Concentration"/>
+					<Text TextId="T_ID_CONCENTRATION_RATE" Value="Desired Concentration"/>
+					<Text TextId="T_ID_ACTUAL_CONCENTRATION" Value="Actual Concentration"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_METERING_MONITOR" Value="Metering Monitor"/>
+					<Text TextId="T_ID_INFO_TEXT_METERING_MONITOR" Value="Metering Monitor"/>
+					<Text TextId="T_ID_METERING_MONITOR" Value="Metering Monitor"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_ERROR_WARNING" Value="Error/Warning"/>
+					<Text TextId="T_ID_INFO_TEXT_ERROR_WARNING" Value="Error/Warning"/>
+					<Text TextId="T_ID_ERROR" Value="Error"/>
+					<Text TextId="T_ID_WARNING" Value="Warning"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_STROKES_QUANTITY" Value="Strokes/Quantities"/>
+					<Text TextId="T_ID_INFO_TEXT_STROKES_QUANTITY" Value="Strokes/Quantities"/>
+					<Text TextId="T_ID_RESET_STROKE_COUNTER" Value="Reset Stroke Counter"/>
+					<Text TextId="T_ID_RESET_QUANTITY_COUNTER" Value="Reset Quantity Counter"/>
+					<Text TextId="T_ID_STROKE_COUNTER" Value="Stroke Counter"/>
+					<Text TextId="T_ID_QUANTITY_COUNTER" Value="Quantity Counter"/>
+					<Text TextId="T_ID_LITRES_PER_STROKE" Value="Litres Per Stroke"/>
+					
+					<!-- Error values -->
+					<Text TextId="T_LIMIT_ERROR_WRITE" Value="limit error while writing"/>
+					<Text TextId="T_LIMIT_ERROR_READ" Value="limit error while reading"/>
+					<Text TextId="T_DATA_SAVED" Value="data saved"/>
+					<Text TextId="T_NOT_IN_REMOTE" Value="device not in remote operation"/>
+					<Text TextId="T_OPTION_NOT_INSTALLED" Value="option not installed"/>
+					<Text TextId="T_SERVICE_NOT_DEFINED" Value="service not installed"/>
+					<Text TextId="T_VALUE_NOT_CHANGABLE" Value="value not changeable"/>
+					
+				</PrimaryLanguage>
+				
+				<Language xml:lang="de">
+				<!--Device Access Point information etc -->
+					<Text TextId="T_ID_DEV_DESCRIPTION" Value="ProMinent GMXa PROFINET IO 2-Port"/>
+					<Text TextId="T_ID_V1_DEV_DESCRIPTION" Value="Dieser Device Access Point darf von IO Controllern betrieben werden, welche keine erweiterte PROFINET-Diagnose unterstuetzen. RT-Kommunikation wird unterstuetzt"/>
+					<Text TextId="T_ID_V15_DEV_DESCRIPTION" Value="Dieser Device Access Point darf von IO Controllern betrieben werden, welche keine erweiterte PROFINET-Diagnose unterstuetzen. RT-Kommunikation wird unterstuetzt"/>
+					<Text TextId="T_ID_V2_DEV_DESCRIPTION" Value="Dieser Device Access Point unterstuetzt RT-Kommunikation"/>
+					<Text TextId="T_ID_DAP_V1" Value="RT"/>
+					<Text TextId="T_ID_DAP_V15" Value="RT (FW&gt;=1.13)"/>
+					<Text TextId="T_ID_DAP_V2" Value="RT"/>
+					<Text TextId="T_ID_SS_INTERFACE" Value="X1"/>
+					<Text TextId="T_ID_SS_PORT1" Value="P1"/>
+					<Text TextId="T_ID_SS_PORT2" Value="P2"/>
+					<Text TextId="T_ID_DAP_INTERFACE_MODULE" Value="Interface"/>
+					<Text TextId="T_ID_PORT1" Value="Port 1"/>
+					<Text TextId="T_ID_PORT2" Value="Port 2"/>
+					<Text TextId="T_ID_INTERFACE" Value="X1"/>
+
+					<!--Module category-->
+					<Text TextId="T_ID_CAT_REF_MODULES" Value="Eingang/Ausgang"/>
+					<!--Text TextId="T_ID_MIGRATION_DAP" Value="Migration"/-->
+
+					<!-- Vendor module texts -->	
+					<Text TextId="T_ID_MODULE_NAME_STATUS" Value="Geraetestatus"/>
+					<Text TextId="T_ID_INFO_TEXT_STATUS" Value="Geraetestatus"/>
+					<Text TextId="T_ID_STATUS" Value="Gefraetestatus"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_CONTROL" Value="Geraetesteuerung"/>
+					<Text TextId="T_ID_INFO_TEXT_CONTROL" Value="Geraetesteuerung"/>
+					<Text TextId="T_ID_START_STOP" Value="Start/Stop"/>
+					<Text TextId="T_ID_RESET" Value="Reset"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_MODE" Value="Betriebsart"/>
+					<Text TextId="T_ID_INFO_TEXT_MODE" Value="Betriebsart"/>
+					<Text TextId="T_ID_TARGET_MODE" Value="Soll-Betriebsart"/>
+					<Text TextId="T_ID_OPERATING_MODE" Value="Ist-Betriebsart"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_FLOW_RATE" Value="Dosierleistung"/>
+					<Text TextId="T_ID_INFO_TEXT_FLOW_RATE" Value="Dosierleistung"/>
+					<Text TextId="T_ID_NOMINAL_FLOW_RATE" Value="Soll-Dosierleistung"/>
+					<Text TextId="T_ID_ACTUAL_FLOW_RATE" Value="Ist-Dosierleistung"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_MAX_FLOW_RATE" Value="Maximale Dosierleistung"/>
+					<Text TextId="T_ID_INFO_TEXT_MAX_FLOW_RATE" Value="Maximale Dosierleistung"/>
+					<Text TextId="T_ID_MAX_FLOW_RATE" Value="Maximale Dosierlleistung"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_BATCH" Value="Batch Betriebsart"/>
+					<Text TextId="T_ID_INFO_TEXT_BATCH" Value="Batch Betriebsart"/>
+					<Text TextId="T_ID_BATCH_VOLUME" Value="Batch Volumen"/>
+					<Text TextId="T_ID_BATCH_TIME" Value="Batch Zeitdauer"/>
+					<Text TextId="T_ID_BATCH_START" Value="Batch Start"/>
+					<Text TextId="T_ID_BATCH_MEMORY" Value="Batch Speicherfunktion"/>
+					<Text TextId="T_ID_REMAINING_VOLUME" Value="Restdosiermenge"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_CONTACT" Value="Kontakt Betriebsart"/>
+					<Text TextId="T_ID_INFO_TEXT_CONTACT" Value="Kontakt Betriebsart"/>
+					<Text TextId="T_ID_CONTACT_VOLUME" Value="Kontakt Volumen"/>
+					<Text TextId="T_ID_CONTACT_MEMORY" Value="Kontakt Speicherfunktion"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_CONCENTRATION" Value="Konzentrationsbetrieb"/>
+					<Text TextId="T_ID_INFO_TEXT_CONCENTRATION" Value="Konzentrationsbetrieb"/>
+					<Text TextId="T_ID_CONCENTRATION_RATE" Value="gewuenschte Endkonzentration"/>
+					<Text TextId="T_ID_ACTUAL_CONCENTRATION" Value="aktuelle Endkonzentration"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_METERING_MONITOR" Value="Dosierueberwachung aktivieren/deaktivieren"/>
+					<Text TextId="T_ID_INFO_TEXT_METERING_MONITOR" Value="Dosierueberwachung aktivieren/deaktivieren"/>
+					<Text TextId="T_ID_METERING_MONITOR" Value="Dosierueberwachung aktivieren/deaktivieren"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_ERROR_WARNING" Value="Fehler/Warnung"/>
+					<Text TextId="T_ID_INFO_TEXT_ERROR_WARNING" Value="Fehler/Warnung"/>
+					<Text TextId="T_ID_ERROR" Value="Fehler"/>
+					<Text TextId="T_ID_WARNING" Value="Warnung"/>
+					
+					<Text TextId="T_ID_MODULE_NAME_STROKES_QUANTITY" Value="Huebe/Dosiermengen"/>
+					<Text TextId="T_ID_INFO_TEXT_STROKES_QUANTITY" Value="Huebe/Dosiermengen"/>
+					<Text TextId="T_ID_RESET_STROKE_COUNTER" Value="Hubzaehler zuruecksetzen"/>
+					<Text TextId="T_ID_RESET_QUANTITY_COUNTER" Value="Dosiermengenzaehler zuruecksetzen"/>
+					<Text TextId="T_ID_STROKE_COUNTER" Value="Hubzaehler"/>
+					<Text TextId="T_ID_QUANTITY_COUNTER" Value="Dosiermengenzaehler"/>
+					<Text TextId="T_ID_LITRES_PER_STROKE" Value="Liter pro Hub"/>
+					
+					<!-- Error values -->
+					<Text TextId="T_LIMIT_ERROR_WRITE" Value="Limitfehler beim Schreiben"/>
+					<Text TextId="T_LIMIT_ERROR_READ" Value="Limitfehler beim Lesen"/>
+					<Text TextId="T_DATA_SAVED" Value="Geschützter Wert"/>
+					<Text TextId="T_NOT_IN_REMOTE" Value="Gerät nicht im Remotebetrieb"/>
+					<Text TextId="T_OPTION_NOT_INSTALLED" Value="Option nicht installiert"/>
+					<Text TextId="T_SERVICE_NOT_DEFINED" Value="Dienst nicht definiert"/>
+					<Text TextId="T_VALUE_NOT_CHANGABLE" Value="Wert nicht änderbar"/>
+					
+				</Language>
+			</ExternalTextList>
+		</ApplicationProcess>
+	</ProfileBody>
+</ISO15745Profile>
