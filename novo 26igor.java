@@ -18,6 +18,7 @@
     if (v !== v) return null;
     return v;
   }
+  IGORRRRRRRRRRRRRRRRRRRRRRRR
 
   const frete = diasFrete("[Venda.Estado de destino]", `[Sua Empresa.DiasFretePorEstado]`);
   if (frete === null) return "";
