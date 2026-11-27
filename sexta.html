@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sextou! 🎉</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #ff4e50, #f9d423, #ff6fd8, #3813c2);
+    background-size: 400% 400%;
+    animation: fundo 10s ease infinite;
+    color: #fff; text-align: center; cursor: pointer; user-select: none;
+  }
+  @keyframes fundo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  h1 {
+    font-size: clamp(4rem, 18vw, 14rem);
+    letter-spacing: -0.03em;
+    text-shadow: 0 6px 0 rgba(0,0,0,.25), 0 12px 30px rgba(0,0,0,.3);
+    animation: pulo 1.2s ease-in-out infinite;
+    position: relative; z-index: 2;
+  }
+  h1 span { display: inline-block; animation: onda 1.2s ease-in-out infinite; }
+  @keyframes pulo { 0%,100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.06) rotate(2deg); } }
+  @keyframes onda { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-0.12em); } }
+  p {
+    margin-top: 1rem; font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 700;
+    font-size: clamp(1rem, 3vw, 1.6rem); opacity: .95; z-index: 2; position: relative;
+    text-shadow: 0 2px 8px rgba(0,0,0,.3);
+  }
+  .dica { margin-top: 2rem; font-size: .9rem; font-weight: 400; opacity: .8; }
+  .confete {
+    position: fixed; top: -20px; width: 10px; height: 16px; border-radius: 2px;
+    z-index: 1; pointer-events: none; animation: cair linear forwards;
+  }
+  @keyframes cair { to { transform: translateY(110vh) rotate(720deg); } }
+</style>
+</head>
+<body>
+  <h1 id="titulo">Sextou!</h1>
+  <p>🍻 Bom fim de semana! 🎶</p>
+  <p class="dica">clique em qualquer lugar pra mais confete</p>
+
+<script>
+  // Letras com efeito de onda
+  const t = document.getElementById('titulo');
+  t.innerHTML = [...t.textContent].map((c, i) =>
+    `<span style="animation-delay:${i * 0.08}s">${c}</span>`).join('');
+
+  const cores = ['#fff', '#ffe600', '#00e5ff', '#ff2d95', '#7cff4f', '#ff8a00'];
+  function confete(qtd) {
+    for (let i = 0; i < qtd; i++) {
+      const c = document.createElement('div');
+      c.className = 'confete';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.background = cores[Math.floor(Math.random() * cores.length)];
+      c.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      c.style.animationDelay = (Math.random() * 1.5) + 's';
+      c.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 7000);
+    }
+  }
+  confete(80);
+  setInterval(() => confete(15), 1200);
+  document.body.addEventListener('click', () => confete(60));
+</script>
+</body>
+</html>
