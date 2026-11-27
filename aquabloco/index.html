@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preload" as="font" type="font/woff2" href="fonts/montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="image" href="img/capa-celular.webp" media="(max-width:760px)" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="img/capa-1280.webp 1280w, img/capa.webp 1600w" imagesizes="64vw" media="(min-width:761px)" fetchpriority="high">
+<title>Aquabloco</title>
+<!-- Meta Pixel 317971006449150 pelo GTM "Safeeds - Landing Pages"; o referrer completo
+     (com as UTMs do anuncio) vai para a Tray, que registra como origem da visita -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+<script>
+  // Consentimento da medicao: liga por padrao e o "Recusar" do aviso de cookies desliga na hora.
+  // A escolha fica no localStorage por 12 meses (mesma regra da landing do Colinpass).
+  window.dataLayer = window.dataLayer || [];
+  window.aqMedicao = (function(){
+    var CHAVE = 'aq-cookies', VALIDADE = 365*24*3600*1000, ligado = false;
+    function le(){ try { var v = JSON.parse(localStorage.getItem(CHAVE) || 'null');
+      return (v && v.em && (Date.now() - v.em) < VALIDADE) ? v.escolha : null; } catch(e){ return null; } }
+    function grava(escolha){ try { localStorage.setItem(CHAVE, JSON.stringify({escolha: escolha, em: Date.now()})); } catch(e){} }
+    function liga(){
+      if(ligado) return; ligado = true;
+      // Google Tag Manager (contêiner "Safeeds - Landing Pages", com o Meta Pixel e o Microsoft Clarity)
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5FL988WR');
+    }
+    function desliga(){                                   // o Clarity entra pelo GTM (tag "Clarity | LPs"), por isso tambem e desligado aqui
+      try { if(window.fbq) window.fbq('consent', 'revoke'); } catch(e){}
+      try { if(window.clarity) window.clarity('consent', false); } catch(e){}
+    }
+    // medicao entra logo depois que a pagina termina de carregar (nao disputa a conexao com a primeira tela)
+    if(le() !== 'recusado'){
+      if(document.readyState === 'complete') liga();
+      else window.addEventListener('load', function(){ setTimeout(liga, 0); });
+    }
+    return { escolha: le, aceitar: function(){ grava('aceito'); liga(); try { if(window.fbq) window.fbq('consent', 'grant'); } catch(e){} },
+             recusar: function(){ grava('recusado'); desliga(); } };
+  })();
+</script>
+<style>
+@font-face{font-family: 'Montserrat'; font-style: normal; font-weight: 500 900; font-display: swap; src: url(fonts/montserrat-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family: 'Montserrat'; font-style: normal; font-weight: 500 900; font-display: swap; src: url(fonts/montserrat-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+/* Aquabloco (caixa com 6 blocos de 2 kg): pagina de produto no mesmo esquema das outras paginas de produto Safeeds (Colinpass).
+   Texto: somente o folder Safeeds_Aquabloco.pdf, cada dado uma vez; preco e similares vem da loja.
+   Cor: azul-marinho e verde-agua do folder. As variaveis --verde* mantem o nome do esquema, mas guardam o azul. */
+:root{
+  /* --verde* = azul-marinho do logo Aquabloco (nome mantido do esquema das outras paginas) */
+  --verde:#173B66; --verde-hover:#10304F; --verde-esc:#0D2744; --verde-med:#2E5B82;
+  --acento:#08A79E; --acento-esc:#067D76; --amarelo:#FBBA23;
+  --claro:#F1F6F7; --tint:#E6F2F3; --linha:#D4E1E4; --linha-2:#B2C8CD;
+  --tinta:#13212C; --texto:#3A4751; --suave:#586672;
+  --branco:#FFFFFF;
+  --fonte:'Montserrat',Arial,Helvetica,sans-serif;
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:80px;
+  --r1:8px; --r2:12px; --r3:20px;
+  --sombra:0 1px 2px rgba(15,41,69,.06),0 8px 20px -12px rgba(15,41,69,.22);
+  --max:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--branco);color:var(--texto);font-family:var(--fonte);font-weight:500;font-size:15px;
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{color:var(--verde);font-weight:900;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+p{text-wrap:pretty}
+.wrap{width:min(var(--max),100% - 48px);margin-inline:auto}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+:focus-visible{outline:3px solid var(--verde);outline-offset:3px;border-radius:6px}
+.sec{padding-block:var(--s6)}
+.sec-claro{background:var(--claro)}
+.sec-titulo{font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:14px 28px;border:0;
+  border-radius:999px;background:var(--verde);color:#fff;font-family:inherit;font-weight:800;font-size:1.02rem;line-height:1.25;
+  cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--verde-hover)}
+
+/* ---------- FAIXA PROMOCIONAL (letreiro rolante) ---------- */
+.aviso{background:var(--verde-esc);color:#fff;overflow:hidden;font-size:.8rem;font-weight:700}
+.aviso-trilho{display:flex;width:max-content;animation:rola 40s linear infinite}
+.aviso-grupo{display:flex;align-items:center;gap:26px;padding:10px 13px}
+.aviso-grupo span{white-space:nowrap}
+.aviso-grupo b{color:var(--amarelo);font-weight:800}
+.aviso-grupo i{font-style:normal;color:#3FD0C4}
+@keyframes rola{to{transform:translateX(-50%)}}
+
+/* ---------- ABERTURA ----------
+   Fundo azul-marinho chapado; a foto do bloco batendo na agua entra pela direita e se funde no azul
+   (mascara em degrade); o texto fica inteiro sobre o azul, a esquerda. Ate 760 px: texto em cima e foto embaixo. */
+.capa{position:relative;isolation:isolate;background:#0D2744;overflow:hidden}
+.capa-img{position:absolute;top:0;right:0;bottom:0;width:64%;z-index:-1}
+.capa-img img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.5) 24%,#000 52%);
+          mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.5) 24%,#000 52%)}
+.capa-txt{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  min-height:clamp(460px,36vw,660px);padding-block:clamp(44px,4.6vw,88px)}
+.capa-l1{color:#7FDCD3;font-size:clamp(1.35rem,2.08vw,2.5rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;max-width:21ch;text-wrap:balance}
+.capa-marca{margin:clamp(14px,1.3vw,24px) 0 clamp(10px,.9vw,16px)}
+.capa-logo{display:block;height:clamp(40px,3.9vw,74px);width:auto}
+.capa-l2{color:#fff;font-size:clamp(1.25rem,1.94vw,2.3rem);font-weight:800;letter-spacing:-.035em;line-height:1}
+.capa-tag{color:#D3E3EF;font-size:clamp(1rem,1.02vw,1.22rem);font-weight:600;line-height:1.5;max-width:32ch;margin-top:clamp(12px,1vw,20px)}
+.capa-txt .btn{margin-top:clamp(18px,1.6vw,30px);min-width:min(100%,280px);background:#fff;color:var(--verde)}
+.capa-txt .btn:hover{background:#E3F4F3}
+@keyframes entra{from{opacity:0;transform:translateY(16px)}}
+.capa-txt>*{animation:entra .8s cubic-bezier(.22,1,.36,1) both}
+.capa-txt>*:nth-child(2){animation-delay:.08s}
+.capa-txt>*:nth-child(3){animation-delay:.16s}
+.capa-txt>*:nth-child(4){animation-delay:.24s}
+.capa-txt>*:nth-child(5){animation-delay:.32s}
+@media(max-width:760px){
+  .capa-img{position:static;width:100%;height:auto}
+  .capa-img img{height:auto;aspect-ratio:4/3;object-position:50% 50%;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 34%);mask-image:linear-gradient(180deg,transparent 0,#000 34%)}
+  .capa-txt{min-height:0;padding-block:32px 0}
+  .capa-l1{font-size:1.45rem;max-width:none}
+  .capa-l2{font-size:1.35rem}
+  .capa-logo{height:44px}
+  .capa-tag{max-width:none}
+}
+
+/* ---------- ASSINATURA ---------- */
+.assina{background:var(--branco);border-bottom:1px solid var(--linha);padding-block:clamp(20px,2.4vw,30px)}
+.assina .in{display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);flex-wrap:wrap}
+.assina img{height:clamp(34px,3.6vw,46px);width:auto}
+.assina p{color:#3E3A36;font-weight:800;font-size:clamp(.95rem,1.3vw,1.15rem);letter-spacing:-.02em;line-height:1.32}
+
+/* ---------- CARACTERISTICAS E BENEFICIOS ----------
+   Mesma roda do Colinpass: vantagens em volta do selo. No centro, o selo
+   "Tecnologia anticorrosiva Safeeds" do folder: o anel com o texto gira, o disco com o vagao fica parado. */
+.tec-cab{display:grid;gap:14px;justify-items:start;margin-bottom:clamp(34px,4.4vw,56px)}
+.tec-cab p{max-width:58ch;font-size:clamp(1rem,1.25vw,1.1rem)}
+.orbita{display:grid;grid-template-columns:1fr minmax(260px,420px) 1fr;align-items:center;gap:clamp(20px,4vw,56px)}
+.orbita ul{list-style:none;display:grid;gap:clamp(26px,3.4vw,44px)}
+.orbita li{display:flex;align-items:flex-start;gap:12px;color:var(--verde);font-weight:800;
+  font-size:clamp(1.02rem,1.5vw,1.28rem);letter-spacing:-.02em;line-height:1.22}
+.orbita li .ck{flex:0 0 26px;height:26px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;margin-top:1px}
+.orbita li .ck svg{width:14px;height:14px}
+.orbita .centro{position:relative;aspect-ratio:1;width:100%;margin-inline:auto}
+.orbita .anel{position:absolute;inset:0;width:100%;height:100%;animation:gira 60s linear infinite}
+.orbita .anel text{font-family:var(--fonte);font-weight:800;font-size:15.5px;fill:var(--verde);letter-spacing:.02em}
+.orbita .disco{position:absolute;inset:8%}
+.orbita .disco img{display:block;width:auto;height:100%;margin-inline:auto}
+@keyframes gira{to{transform:rotate(360deg)}}
+.nw{white-space:nowrap}
+
+/* ---------- COMPRA ---------- */
+.compra-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s6);align-items:center}
+.compra-img{position:relative;isolation:isolate;display:grid;place-items:center;padding-block:var(--s2)}
+/* sombra de contato embutida na imagem (fazer_galao.py): sem filtro e sem elipse no CSS */
+.compra-img img{justify-self:end;max-width:none;height:auto;
+  width:min(600px,calc(100% + clamp(0px,(100vw - var(--max)) / 2 - 16px,110px)))}
+.compra-painel{display:grid;gap:var(--s3);max-width:560px}
+.compra-cab h2{line-height:1}
+.compra-logo{height:clamp(39px,3.4vw,54px);width:auto}
+.compra-cab p{margin-top:12px;font-size:clamp(.95rem,1.2vw,1.05rem);font-weight:700;color:var(--tinta);letter-spacing:-.01em}
+.planos-cab{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;margin-bottom:12px}
+.planos-rot{font-size:.9375rem;font-weight:700;color:var(--tinta)}
+.planos-nota{font-size:.875rem;color:var(--suave)}
+.planos-nota b{font-weight:800;color:var(--verde)}
+.planos{display:grid;gap:12px}
+.plano{display:grid;grid-template-columns:22px minmax(0,1fr) auto;grid-template-areas:"r n p" "r k e";column-gap:var(--s2);row-gap:2px;
+  align-items:center;padding:14px 20px;background:var(--branco);border:2px solid var(--linha);border-radius:var(--r2);cursor:pointer;
+  transition:border-color .15s,background .15s}
+.plano:hover{border-color:var(--linha-2)}
+.plano.sel{border-color:var(--verde);background:var(--tint)}
+.plano>input{grid-area:r;appearance:none;width:22px;height:22px;margin:0;border-radius:50%;border:2px solid #97AD9E;background:var(--branco);
+  display:grid;place-items:center;cursor:pointer}
+.plano>input::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--verde);transform:scale(0);transition:transform .15s}
+.plano>input:checked{border-color:var(--verde)}
+.plano>input:checked::after{transform:scale(1)}
+.pl-qtd{grid-area:n;font-weight:800;font-size:1.2rem;letter-spacing:-.02em;color:var(--tinta);line-height:1.3}
+.plano:not(.plano-livre) .pl-qtd{white-space:nowrap}
+.pl-peso{grid-area:k;font-size:.875rem;color:var(--suave);line-height:1.4}
+.pl-preco{grid-area:p;justify-self:end;font-weight:900;font-size:clamp(1.4rem,2.2vw,1.8rem);color:var(--verde-esc);letter-spacing:-.02em;line-height:1.2}
+.pl-extra{grid-area:e;justify-self:end;text-align:right;font-size:.875rem;color:var(--suave);line-height:1.4}
+.pl-extra s{color:var(--suave)}
+.pl-extra b{font-weight:800;color:var(--verde)}
+.plano-livre{grid-template-areas:"r n p" "r k k" "r e e"}
+.plano-livre .pl-extra{justify-self:end;text-align:right}
+.plano-livre .pl-peso{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;margin-top:6px}
+.passo{display:inline-flex;align-items:center;border:1.5px solid var(--linha-2);border-radius:999px;background:var(--branco);overflow:hidden}
+.passo-b{width:36px;height:36px;border:0;background:transparent;font:inherit;font-weight:800;font-size:1.15rem;line-height:1;color:var(--verde);cursor:pointer}
+.passo-b:hover{background:var(--tint)}
+.passo-b:focus-visible,.passo input:focus-visible{outline:2px solid var(--verde);outline-offset:-2px}
+.passo input{width:46px;height:36px;border:0;padding:0;text-align:center;font:inherit;font-weight:800;font-size:1rem;color:var(--tinta);background:transparent;-moz-appearance:textfield;appearance:textfield}
+.passo input::-webkit-outer-spin-button,.passo input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.btn-compra{width:100%;min-height:56px;font-size:1.0625rem}
+.compra-acao{display:grid;gap:10px}
+.pagto{margin:0;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.9375rem;font-weight:600;color:var(--texto);line-height:1.4}
+.pagto svg{flex:none;width:19px;height:19px;color:var(--verde-med)}
+.btn-compra .det{font-weight:600;padding-left:12px;border-left:1px solid rgba(255,255,255,.4)}
+
+/* ---------- ETAPAS (producao, armazenagem, manipulacao) ---------- */
+.etapas-cab{display:grid;gap:14px;justify-items:start;margin-bottom:var(--s4)}
+.etapas-cab p{max-width:62ch;font-size:clamp(1rem,1.25vw,1.1rem)}
+.etapas-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.etapa{background:var(--claro);border-radius:var(--r2);overflow:hidden;display:grid;grid-template-rows:auto 1fr;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.etapa-foto{overflow:hidden}
+.etapa img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.etapa-txt{padding:var(--s3);display:grid;gap:10px;align-content:start}
+.etapa-txt::before{content:"";width:24px;height:4px;border-radius:2px;background:var(--acento);transition:width .35s cubic-bezier(.22,1,.36,1)}
+/* destaque ao passar o mouse (so em aparelhos com mouse) */
+@media(hover:hover){
+  .etapa:hover{transform:translateY(-6px);box-shadow:0 20px 36px -20px rgba(15,41,69,.38)}
+  .etapa:hover img{transform:scale(1.06)}
+  .etapa:hover .etapa-txt::before{width:56px}
+}
+.etapa h3{font-size:clamp(1.2rem,1.6vw,1.4rem);letter-spacing:-.02em}
+.etapa p{font-size:1rem;color:var(--texto)}
+
+/* ---------- TECNOLOGIA DE LIBERACAO MULTIPLA ---------- */
+.lib-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s6);align-items:center}
+.lib-txt{display:grid;gap:16px;justify-items:start}
+.lib-rot{font-size:.95rem;font-weight:800;color:var(--acento-esc);letter-spacing:.01em}
+.lib-txt .sec-titulo{max-width:14ch}
+.lib-txt p:not(.lib-rot){max-width:40ch;font-size:clamp(1rem,1.25vw,1.12rem)}
+.lib-fig img{width:100%;height:auto}
+
+/* ---------- PERGUNTAS FREQUENTES ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--s6);align-items:start}
+.faq-lista{display:grid;gap:12px}
+.faq details{background:var(--claro);border-radius:var(--r2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  padding:20px var(--s3);font-weight:800;font-size:clamp(1rem,1.3vw,1.12rem);color:var(--verde);letter-spacing:-.015em;line-height:1.4;border-radius:var(--r2)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-ico{flex:0 0 28px;height:28px;border-radius:50%;border:1.5px solid var(--verde);position:relative}
+.faq-ico::before,.faq-ico::after{content:"";position:absolute;left:50%;top:50%;background:var(--verde);border-radius:1px;transform:translate(-50%,-50%)}
+.faq-ico::before{width:12px;height:2px}
+.faq-ico::after{width:2px;height:12px;transition:transform .2s}
+.faq details[open] .faq-ico::after{transform:translate(-50%,-50%) scaleY(0)}
+.faq .resp{padding:0 var(--s3) 20px;max-width:65ch;font-size:1rem}
+.faq .resp b{font-weight:700;color:var(--tinta)}
+.faq .resp p+p,.faq .resp p+ol,.faq .resp ol+p{margin-top:.75em}
+.faq .resp a{color:var(--verde);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.fases{list-style:none;display:grid;gap:10px}
+.fases li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:baseline}
+.fases li b{color:var(--verde);font-weight:900;font-size:1.15rem}
+
+/* ---------- PRODUTOS SIMILARES ---------- */
+.similares .sec-titulo{margin-bottom:var(--s4)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+.card{display:grid;grid-template-rows:auto 1fr auto auto;gap:12px;background:var(--branco);border:1px solid var(--linha);
+  border-radius:var(--r2);padding:var(--s2);transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--linha-2);box-shadow:var(--sombra)}
+.card-foto{display:block;aspect-ratio:4/3;border-radius:var(--r1);overflow:hidden;background:var(--branco)}
+.card-foto img{width:100%;height:100%;object-fit:contain}
+.card h3{font-size:.92rem;font-weight:700;color:var(--tinta);letter-spacing:0;line-height:1.4;min-height:2.8em}
+.card-preco{font-size:1.22rem;font-weight:900;color:var(--verde-esc)}
+.card-btn{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;border:1.5px solid var(--verde);
+  color:var(--verde);font-weight:800;font-size:.9rem;transition:background .2s,color .2s}
+.card:hover .card-btn{background:var(--verde);color:#fff}
+
+/* ---------- RODAPE ---------- */
+.rodape{background:var(--branco);border-top:1px solid var(--linha);padding-block:var(--s5) var(--s4);font-size:.9375rem}
+.rod-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--s4)}
+.rod-marca img{width:190px;max-width:100%;height:auto}
+.rodape h4{font-size:.95rem;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+.rodape ul{list-style:none;display:grid;gap:4px}
+.rodape li a{display:inline-block;padding-block:4px;color:var(--texto)}
+.rodape li a:hover{color:var(--verde);text-decoration:underline;text-underline-offset:3px}
+.rodape li a.rod-social{display:inline-flex;align-items:center;gap:8px}
+.rod-ic{width:18px;height:18px;flex:0 0 18px;color:var(--verde)}
+.legal{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--linha);font-size:.8125rem;color:var(--suave);line-height:1.6}
+
+/* botao do WhatsApp: some sobre a area de compra e o rodape (JS) */
+.zap{position:fixed;right:20px;bottom:20px;z-index:30;width:48px;height:48px;border-radius:50%;background:#25D366;color:#fff;
+  display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:opacity .2s,visibility .2s}
+.zap svg{width:26px;height:26px}
+.zap.oculto{opacity:0;visibility:hidden}
+
+/* ---------- PRE-CHECKOUT ---------- */
+.pc{border:0;padding:0;border-radius:var(--r3);width:min(600px,100% - 24px);max-height:calc(100dvh - 24px);margin:auto;
+  background:var(--branco);color:var(--texto);box-shadow:0 40px 80px -30px rgba(0,18,40,.6);overflow:auto;overscroll-behavior:contain}
+.pc::backdrop{background:rgba(9,26,46,.6)}
+.pc-topo{position:sticky;top:0;z-index:1;background:var(--verde);color:#fff;padding:var(--s2) 18px var(--s2) var(--s2);
+  display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.pc-topo img{width:40px;height:auto;background:#fff;border-radius:8px;padding:3px}
+.pc-topo .qtd{display:block;font-weight:500;font-size:.9375rem;color:#CFE0EE}
+.pc-topo .val{display:block;color:var(--amarelo);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;line-height:1.2}
+.pc-fechar{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;
+  display:grid;place-items:center;transition:background .2s}
+.pc-fechar:hover{background:rgba(255,255,255,.26)}
+.pc-fechar svg{width:18px;height:18px}
+.pc-corpo{padding:var(--s3);display:grid;gap:var(--s3)}
+.pc h2{font-size:1.5rem;line-height:1.2}
+.pc-sub{font-size:.9375rem;margin-top:var(--s1)}
+.pc-campos{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2) 12px}
+.campo{display:grid;gap:6px;align-content:start}
+.campo.largo{grid-column:1/-1}
+.campo label{font-size:.875rem;font-weight:700;color:var(--tinta)}
+.campo input,.campo select{width:100%;min-height:48px;border:1.5px solid var(--linha-2);border-radius:var(--r2);background-color:var(--branco);
+  padding:12px 14px;font:inherit;font-size:1rem;font-weight:500;color:var(--tinta);transition:border-color .2s,box-shadow .2s}
+.campo select{appearance:none;cursor:pointer;padding-right:42px;
+  background:var(--branco) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23173B66' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/17px}
+.campo input::placeholder{color:#6F7A73;font-weight:400}
+.campo input:focus,.campo select:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(23,59,102,.18)}
+.campo[data-erro] input,.campo[data-erro] select{border-color:#B8321F}
+.erro{font-size:.8125rem;color:#A82C1B;font-weight:600;line-height:1.35}
+.erro:empty{display:none}
+.aceite{display:flex;gap:12px;align-items:flex-start;font-size:.875rem;line-height:1.5;color:var(--texto);cursor:pointer}
+.aceite input{flex:0 0 20px;width:20px;height:20px;margin-top:2px;accent-color:var(--verde);cursor:pointer}
+.pc-aviso{background:#FFF3D1;color:#5A3E00;border-radius:var(--r2);padding:12px var(--s2);font-size:.875rem;font-weight:500}
+.pc-aviso a{font-weight:700;color:inherit;text-decoration:underline}
+.pc .btn{width:100%;min-height:56px}
+.pc .btn[disabled]{opacity:.72;cursor:progress}
+/* barra de acao fixa: o botao fica visivel sem rolar o dialogo */
+.pc-acao{position:sticky;bottom:0;z-index:1;background:var(--branco);border-top:1px solid var(--linha);
+  padding:14px var(--s3) 16px;display:grid;gap:10px;box-shadow:0 -10px 20px -18px rgba(16,40,26,.5)}
+.pc-acao .btn{min-height:52px}
+.pc-direto{justify-self:center;background:none;border:0;padding:4px 8px;font:inherit;font-size:.875rem;font-weight:700;
+  color:var(--suave);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.pc-direto:hover{color:var(--verde)}
+.pc-lgpd{font-size:.75rem;line-height:1.4;color:var(--suave);text-align:center;margin:0}
+.pc-lgpd a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.campo .opc{font-weight:600;color:var(--suave)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.pc [hidden]{display:none!important}
+
+/* ---------- POP-UP DE SAIDA ---------- */
+.saida-topo{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 18px 0 24px;background:var(--branco)}
+.saida-logo{height:44px;width:auto}
+.saida .pc-fechar{background:var(--claro);color:var(--tinta)}
+.saida .pc-fechar:hover{background:var(--linha)}
+.saida .pc-corpo{padding-top:14px}
+.saida h2{font-size:clamp(1.5rem,3vw,1.9rem)}
+.saida .pc-sub b{color:var(--verde);font-weight:800}
+.saida-nao{justify-self:center;background:none;border:0;padding:6px 10px;font:inherit;font-size:.9375rem;font-weight:600;
+  color:var(--suave);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.saida-nao:hover{color:var(--tinta)}
+
+/* ---------- RESPONSIVO (375 / 390 / 768 / 1280 / 1440) ---------- */
+@media(max-width:1080px){
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .orbita{grid-template-columns:1fr 1fr;row-gap:36px}
+  .orbita .centro{grid-column:1/-1;grid-row:1;max-width:340px;margin-inline:auto}
+  .rod-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:860px){
+  .sec{padding-block:var(--s5)}
+  .compra-grid{grid-template-columns:1fr;gap:var(--s3)}
+  .compra-img img{width:min(100%,440px);justify-self:center}
+  .compra-painel{max-width:none}
+  .etapas-grid{grid-template-columns:1fr;gap:var(--s2)}
+  .etapa{grid-template-columns:minmax(0,2fr) minmax(0,3fr);grid-template-rows:none}
+  .etapa-foto{height:100%}
+  .etapa img{height:100%;aspect-ratio:auto;min-height:170px}
+  .estudo-grid{grid-template-columns:1fr;gap:var(--s4)}
+  .faq-grid{grid-template-columns:1fr;gap:var(--s3)}
+}
+@media(max-width:560px){
+  .orbita{grid-template-columns:1fr}
+  .wrap{width:calc(100% - 32px)}
+  .etapa{grid-template-columns:1fr}
+  .etapa img{height:auto;aspect-ratio:16/9;min-height:0}
+  .etapa-txt{padding:20px}
+  .estudo-graf{padding:20px 16px 16px}
+  .barra{grid-template-columns:1fr;gap:6px}
+  .barra-trilho{height:42px}
+  .plano{grid-template-areas:"r n p" "r k k" "r e e";padding:14px 16px;column-gap:12px}
+  .pl-preco{font-size:1.3125rem}
+  .pl-extra{justify-self:start;text-align:left}
+  .plano-livre .pl-extra{justify-self:start;text-align:left}
+  .btn-compra{flex-direction:column;gap:2px;padding-block:10px}
+  .btn-compra .det{border:0;padding:0;font-size:.9375rem}
+  .cards{gap:12px}
+  .card{padding:12px}
+  .rod-grid{grid-template-columns:1fr}
+  .pc-campos{grid-template-columns:1fr;gap:12px}
+  .pc-corpo{padding:16px var(--s2) 12px;gap:16px}
+  .pc h2{font-size:1.25rem}
+  .pc-sub{font-size:.875rem}
+  .pc-topo{padding:10px 12px 10px var(--s2);gap:10px}
+  .pc-topo img{width:34px}
+  .pc-topo .val{font-size:1.15rem}
+  .pc-fechar{width:38px;height:38px}
+  .campo input,.campo select{min-height:44px;padding:10px 12px}
+  .pc-acao{padding:12px var(--s2) 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+@media(max-width:860px){ .lib-grid{grid-template-columns:1fr;gap:var(--s4)} }
+@media(max-width:700px){ .cards{grid-template-columns:1fr} }
+/* ---------- AVISO DE COOKIES ---------- */
+.cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;max-width:560px;margin-inline:auto;
+  background:var(--verde-esc);color:#fff;border-radius:var(--r1);box-shadow:0 14px 30px -14px rgba(0,0,0,.45);
+  padding:10px 14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.cookies[hidden]{display:none}
+.cookies p{flex:1 1 140px;margin:0;font-size:.75rem;line-height:1.4;color:#D3E3EF}
+.cookies p b{color:#fff;font-weight:800}
+/* o "Recusar" so aparece quando a faixa e aberta por "Preferencias de cookies", no rodape */
+.cookies:not(.completo) .cookies-recusar{display:none}
+.cookies a,.cookies button.link{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.cookies-acoes{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.cookies-acoes button{min-height:34px;padding:6px 15px;border-radius:999px;font:inherit;font-weight:800;font-size:.75rem;cursor:pointer;border:1.5px solid #fff}
+.cookies-recusar{background:transparent;color:#fff}
+.cookies-recusar:hover{background:rgba(255,255,255,.1)}
+.cookies-aceitar{background:#fff;color:var(--verde-esc)}
+.cookies-aceitar:hover{background:#E3F4F3}
+.cookies-acoes button:focus-visible,.cookies a:focus-visible,.cookies button.link:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
+body.com-cookies .zap{bottom:92px}
+@media(max-width:560px){ .cookies{left:10px;right:10px;bottom:10px;padding:9px 12px} }
+.rod-cookies{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.legal a,.aceite a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- POLITICA DE PRIVACIDADE ---------- */
+.politica .pol-corpo{padding:8px 24px 28px;display:grid;gap:14px;font-size:.9375rem;line-height:1.6}
+.politica h2{font-size:1.4rem}
+.politica h3{font-size:1rem;font-weight:800;color:var(--tinta);margin-top:6px}
+.politica ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.politica .pol-data{font-size:.8125rem;color:var(--suave)}
+/* ====== compra sem valor na tela + pre-checkout para o WhatsApp (06/10/2026) ====== */
+.compra-cta{font-size:clamp(1.75rem,3.1vw,2.65rem);font-weight:900;letter-spacing:-.035em;line-height:1.08;
+  color:var(--verde-esc);text-wrap:balance;max-width:none}
+.pc-topo .val:empty{display:none}
+.capa-cta{color:#fff;font-size:clamp(1.05rem,1.35vw,1.35rem);font-weight:800;letter-spacing:-.015em;line-height:1.3;max-width:30ch;margin-top:clamp(12px,1.1vw,20px);text-wrap:balance}
+/* ====== 07/10: frase da capa terminando no logo + selo sobre a foto (como no Colinpass) ====== */
+.capa-marca{margin:0 0 clamp(8px,.8vw,14px);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,.8vw,14px)}
+.capa-marca .capa-l1{display:block}
+.selo-capa{--d:clamp(128px,11.5vw,200px);position:absolute;z-index:3;width:var(--d);height:var(--d);border-radius:50%;
+  display:grid;align-content:center;justify-items:center;gap:calc(var(--d)*.025);text-align:center;padding:calc(var(--d)*.1);
+  background:var(--selo-fundo);color:var(--selo-texto);rotate:-10deg;outline:2.5px solid var(--selo-borda);
+  outline-offset:calc(var(--d)*-.055);box-shadow:0 18px 34px -14px rgba(0,0,0,.6),0 0 0 4px var(--selo-halo);
+  animation:selo-entra .7s .35s cubic-bezier(.22,1,.36,1) both;pointer-events:none}
+.selo-capa b{display:block;font-size:calc(var(--d)*var(--selo-b,.22));font-weight:900;letter-spacing:-.045em;line-height:.92;white-space:nowrap;color:var(--selo-destaque)}
+.selo-capa b.txt{white-space:normal;letter-spacing:-.03em;line-height:1;text-wrap:balance}
+.selo-capa span{display:block;font-size:calc(var(--d)*.066);font-weight:800;line-height:1.2;text-transform:uppercase;letter-spacing:.02em;max-width:calc(var(--d)*.76);text-wrap:balance}
+@keyframes selo-entra{from{opacity:0;scale:.8}}
+@media(prefers-reduced-motion:reduce){.selo-capa{animation:none}}
+.selo-capa{--selo-fundo:#08A79E;--selo-texto:#0D2744;--selo-destaque:#fff;--selo-borda:#0D2744;--selo-halo:rgba(8,167,158,.3);--selo-b:.17}
+.selo-capa{right:7%;top:13%}
+@media(max-width:760px){.capa-img{position:relative}.selo-capa{--d:116px;right:4%;top:auto;bottom:6%}}
+/* ====== compra direta + falar com especialista (09/10/2026) ====== */
+.btn-especialista{justify-self:center;align-self:center;background:none;border:0;min-height:44px;padding:8px 12px;
+  font:inherit;font-size:.9375rem;font-weight:700;line-height:1.3;color:inherit;cursor:pointer;
+  text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.btn-especialista:hover{opacity:.78}
+.btn-especialista:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:6px}
+.capa-img picture{display:contents}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ck" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.6 2 2.2 6.4 2.2 11.84c0 1.74.46 3.44 1.32 4.94L2.1 22l5.36-1.4a9.8 9.8 0 004.58 1.16h.01c5.43 0 9.84-4.4 9.84-9.84 0-2.63-1.02-5.1-2.88-6.96A9.78 9.78 0 0012.04 2zm0 1.8c2.15 0 4.17.84 5.7 2.36a8.02 8.02 0 012.36 5.7c0 4.44-3.62 8.05-8.06 8.05a8.1 8.1 0 01-4.1-1.12l-.3-.18-3.05.8.81-2.98-.19-.3a8.02 8.02 0 01-1.24-4.28c0-4.44 3.62-8.05 8.07-8.05zm-3.4 4.2c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.7 2.6 4.12 3.54.58.25 1.02.4 1.37.5.58.19 1.1.16 1.52.1.46-.07 1.43-.58 1.63-1.15.2-.57.2-1.05.14-1.15-.06-.1-.22-.16-.46-.28-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.53-1.3-.74-1.78-.19-.46-.39-.4-.53-.41h-.47z"/></symbol>
+</svg>
+
+<!-- ===== FAIXA PROMOCIONAL ===== -->
+<div class="aviso" aria-label="Aviso da loja">
+  <div class="aviso-trilho">
+    <div class="aviso-grupo">
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+    </div>
+    <div class="aviso-grupo" aria-hidden="true">
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+      <span>Compre 2 ou mais produtos e ganhe <b>10% de desconto</b></span><i>•</i>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- ===== ABERTURA ===== -->
+<section class="capa">
+  <div class="wrap capa-txt">
+    <h1 class="capa-marca"><span class="capa-l1">Mais saúde e ambiência para a sua piscicultura com</span> <img class="capa-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjEwOS45NSAxOTkuMjAgNDEzLjA3IDYzLjQ5IiB3aWR0aD0iODI2IiBoZWlnaHQ9IjEyNyI+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTEzNC4xNiAyMzMuNDFDMTMxLjY4IDIzMy40MSAxMjkuMjggMjMzLjc4IDEyNy4wMiAyMzQuNDZMMTMzLjg0IDIxMy40OUwxMzQuNDMgMjEzLjQ5TDE0MS4yOCAyMzQuNDZDMTM5LjAzIDIzMy43OCAxMzYuNjQgMjMzLjQxIDEzNC4xNiAyMzMuNDFNMTM2LjIzIDIwMi4wNkwxMzIuMjUgMjAyLjA2QzEyOS40NiAyMDIuMDYgMTI2Ljk5IDIwMy44MyAxMjYuMDkgMjA2LjQ3TDExMS45NSAyNDguMDZMMTE2LjgxIDI0OC4wNkwxMjIuNjEgMjQ4LjA2QzEyNS40MiAyNDQuODQgMTI5LjU1IDI0Mi44MSAxMzQuMTYgMjQyLjgxQzEzOC43NyAyNDIuODEgMTQyLjkwIDI0NC44NCAxNDUuNzEgMjQ4LjA2TDE1My40NSAyNDguMDZMMTU2LjcxIDI0OC4wNkwxNDIuMzggMjA2LjQ0QzE0MS40NyAyMDMuODIgMTM5LjAwIDIwMi4wNiAxMzYuMjMgMjAyLjA2Ii8+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTI3NS42MyAyMzMuNDdDMjczLjE1IDIzMy40NyAyNzAuNzUgMjMzLjgzIDI2OC40OCAyMzQuNTJMMjc1LjYwIDIxMy41NEwyODIuNzUgMjM0LjUxQzI4MC40OSAyMzMuODMgMjc4LjExIDIzMy40NyAyNzUuNjMgMjMzLjQ3TTI3Ny43MCAyMDIuMTFMMjczLjcyIDIwMi4xMUMyNzAuOTMgMjAyLjExIDI2OC40NiAyMDMuODggMjY3LjU2IDIwNi41MkwyNTMuNDIgMjQ4LjEyTDI1OC4yOCAyNDguMTJMMjY0LjA2IDI0OC4xMkwyNjQuMDggMjQ4LjEyQzI2Ni44OSAyNDQuOTAgMjcxLjAyIDI0Mi44NiAyNzUuNjMgMjQyLjg2QzI4MC4yNCAyNDIuODYgMjg0LjM3IDI0NC45MCAyODcuMTggMjQ4LjEyTDI4Ny4yMCAyNDguMTJMMjk0LjkyIDI0OC4xMkwyOTguMTcgMjQ4LjEyTDI4My44NSAyMDYuNTBDMjgyLjk0IDIwMy44NyAyODAuNDcgMjAyLjExIDI3Ny43MCAyMDIuMTEiLz48cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjEzLjQ0IDIzMC42NUwyMTMuNDQgMjA3LjI5QzIxMy40NCAyMDQuNDAgMjE1Ljc4IDIwMi4wNiAyMTguNjggMjAyLjA2QzIyMS41NyAyMDIuMDYgMjIzLjkxIDIwNC40MCAyMjMuOTEgMjA3LjI5TDIyMy45MSAyMzAuNThDMjIzLjkxIDIzNS45MiAyMjYuNzQgMjM5LjIxIDIzMi4yMSAyMzkuMjFDMjM3LjY4IDIzOS4yMSAyNDAuNTEgMjM1LjkyIDI0MC41MSAyMzAuNTFMMjQwLjUxIDIwNy4yOUMyNDAuNTEgMjA0LjQwIDI0Mi44NiAyMDIuMDYgMjQ1Ljc1IDIwMi4wNkMyNDguNjQgMjAyLjA2IDI1MC45OSAyMDQuNDAgMjUwLjk5IDIwNy4yOUwyNTAuOTkgMjMwLjU4QzI1MC45OSAyNDEuNTggMjQzLjQ4IDI0OS4wMiAyMzIuMjEgMjQ5LjAyQzIyMC44OCAyNDkuMDIgMjEzLjQ0IDI0MS41OCAyMTMuNDQgMjMwLjY1Ii8+PHBhdGggZmlsbD0iIzA4QTc5RSIgZD0iTTMxOC4yOSAyMzkuNDFDMzIxLjkxIDIzOS40MSAzMjQuNDIgMjM3LjU2IDMyNC40MiAyMzMuNjFDMzI0LjQyIDIyOS44NiAzMjEuNTIgMjI4LjA4IDMxOC4xNiAyMjguMDhMMzExLjU3IDIyOC4wOEwzMTEuNTcgMjM5LjQxTDMxOC4yOSAyMzkuNDFNMzE4LjI5IDIyMC41N0MzMjEuNzIgMjIwLjU3IDMyMy43NiAyMTguMzkgMzIzLjc2IDIxNS4zNkMzMjMuNzYgMjEyLjUzIDMyMS41OSAyMTAuNTUgMzE4LjM2IDIxMC41NUwzMTEuNTcgMjEwLjU1TDMxMS41NyAyMjAuNTdMMzE4LjI5IDIyMC41N00zMDEuNjMgMjA2Ljc0QzMwMS42MyAyMDQuMTUgMzAzLjcyIDIwMi4wNiAzMDYuMzEgMjAyLjA2TDMxOS42NyAyMDIuMDZDMzI4Ljc3IDIwMi4wNiAzMzMuOTcgMjA3LjMzIDMzMy45NyAyMTQuMzFDMzMzLjk3IDIxOC40NiAzMzEuOTMgMjIxLjc1IDMyOC43NyAyMjMuNjZMMzI4Ljc3IDIyNC4wNkMzMzEuNzkgMjI1LjQ0IDMzNS40OCAyMjguNzQgMzM1LjQ4IDIzNC42NkMzMzUuNDggMjQzLjIzIDMyOC42MyAyNDguMTcgMzIxLjA2IDI0OC4xN0wzMDYuMzEgMjQ4LjE3QzMwMy43MiAyNDguMTcgMzAxLjYzIDI0Ni4wNyAzMDEuNjMgMjQzLjQ5TDMwMS42MyAyMDYuNzQiLz48cGF0aCBmaWxsPSIjMDhBNzlFIiBkPSJNNDA2LjcwIDIyNS4xMUM0MDYuNzAgMjE3LjI3IDQwMS4wMyAyMTEuMjEgMzkzLjA2IDIxMS4yMUMzODUuMDMgMjExLjIxIDM3OS4zNiAyMTcuMjcgMzc5LjM2IDIyNS4xMUMzNzkuMzYgMjMzLjA4IDM4NS4wMyAyMzkuMDEgMzkzLjA2IDIzOS4wMUM0MDEuMDMgMjM5LjAxIDQwNi43MCAyMzMuMDggNDA2LjcwIDIyNS4xMU0zNjguNTYgMjI1LjExQzM2OC41NiAyMTEuNTQgMzc4Ljk3IDIwMS4yMCAzOTMuMDYgMjAxLjIwQzQwNy4xNiAyMDEuMjAgNDE3LjU3IDIxMS42NyA0MTcuNTcgMjI1LjExQzQxNy41NyAyMzguNjIgNDA3LjEwIDI0OS4wMiAzOTMuMDYgMjQ5LjAyQzM3OC45MCAyNDkuMDIgMzY4LjU2IDIzOC43NSAzNjguNTYgMjI1LjExIi8+PHBhdGggZmlsbD0iIzA4QTc5RSIgZD0iTTQyMC45OCAyMjUuMTFDNDIwLjk4IDIxMS41NCA0MzAuODYgMjAxLjIwIDQ0NS4yMiAyMDEuMjBDNDU0LjAwIDIwMS4yMCA0NjAuNzcgMjA1LjA2IDQ2NC43MiAyMTAuODdDNDY3LjExIDIxNC40MSA0NjQuNTMgMjE5LjE4IDQ2MC4yNiAyMTkuMThDNDU4LjM5IDIxOS4xOCA0NTYuNjcgMjE4LjIwIDQ1NS42OSAyMTYuNjBDNDUzLjczIDIxMy40MCA0NDkuOTYgMjExLjIxIDQ0NS4yMiAyMTEuMjFDNDM3LjI1IDIxMS4yMSA0MzEuNzggMjE3LjIxIDQzMS43OCAyMjUuMTFDNDMxLjc4IDIzMy4xNSA0MzcuMjUgMjM5LjAxIDQ0NS4yMiAyMzkuMDFDNDUwLjAyIDIzOS4wMSA0NTMuNzkgMjM2LjgxIDQ1NS45NSAyMzMuNjJDNDU2Ljk2IDIzMi4xMyA0NTguNjQgMjMxLjI0IDQ2MC40MyAyMzEuMjRDNDY0Ljg5IDIzMS4yNCA0NjcuNDQgMjM2LjMyIDQ2NC43NyAyMzkuODlDNDYwLjYzIDI0NS40MiA0NTMuNzIgMjQ5LjAyIDQ0NS4yMiAyNDkuMDJDNDMwLjc5IDI0OS4wMiA0MjAuOTggMjM4Ljc1IDQyMC45OCAyMjUuMTEiLz48cGF0aCBmaWxsPSIjMDhBNzlFIiBkPSJNNTEwLjE1IDIyNS4xMUM1MTAuMTUgMjE3LjI3IDUwNC40OCAyMTEuMjEgNDk2LjUxIDIxMS4yMUM0ODguNDggMjExLjIxIDQ4Mi44MSAyMTcuMjcgNDgyLjgxIDIyNS4xMUM0ODIuODEgMjMzLjA4IDQ4OC40OCAyMzkuMDEgNDk2LjUxIDIzOS4wMUM1MDQuNDggMjM5LjAxIDUxMC4xNSAyMzMuMDggNTEwLjE1IDIyNS4xMU00NzIuMDEgMjI1LjExQzQ3Mi4wMSAyMTEuNTQgNDgyLjQyIDIwMS4yMCA0OTYuNTEgMjAxLjIwQzUxMC42MSAyMDEuMjAgNTIxLjAyIDIxMS42NyA1MjEuMDIgMjI1LjExQzUyMS4wMiAyMzguNjIgNTEwLjU0IDI0OS4wMiA0OTYuNTEgMjQ5LjAyQzQ4Mi4zNSAyNDkuMDIgNDcyLjAxIDIzOC43NSA0NzIuMDEgMjI1LjExIi8+PHBhdGggZmlsbD0iIzA4QTc5RSIgZD0iTTM2My4yOSAyMzguODhMMzU0Ljk2IDIzOC44OEMzNTMuNzIgMjM4Ljg4IDM1Mi43MSAyMzcuODcgMzUyLjcxIDIzNi42M0wzNTIuNzEgMjA3LjI2QzM1Mi43MSAyMDQuMzkgMzUwLjM4IDIwMi4wNiAzNDcuNTEgMjAyLjA2QzM0NC42MyAyMDIuMDYgMzQyLjMwIDIwNC4zOSAzNDIuMzAgMjA3LjI2TDM0Mi4zMCAyNDMuMTFDMzQyLjMwIDI0NS45MCAzNDQuNTcgMjQ4LjE3IDM0Ny4zNiAyNDguMTdMMzcyLjEwIDI0OC4xN0wzNzIuMDkgMjQ4LjE1QzM2OS43MiAyNDUuOTQgMzY3LjY4IDI0My4zOCAzNjYuMDggMjQwLjU0QzM2NS41MSAyMzkuNTIgMzY0LjQ1IDIzOC44OCAzNjMuMjkgMjM4Ljg4Ii8+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTE5NS42NyAyMjUuMDZDMTk1LjY3IDIxNy4yNCAxOTAuMDIgMjExLjE5IDE4Mi4wNiAyMTEuMTlDMTc0LjA1IDIxMS4xOSAxNjguMzkgMjE3LjI0IDE2OC4zOSAyMjUuMDZDMTY4LjM5IDIzMy4wMSAxNzQuMDUgMjM4LjkzIDE4Mi4wNiAyMzguOTNDMTkwLjAyIDIzOC45MyAxOTUuNjcgMjMzLjAxIDE5NS42NyAyMjUuMDZNMTU3LjYxIDIyNS4wNkMxNTcuNjEgMjExLjUyIDE2OC4wMCAyMDEuMjAgMTgyLjA2IDIwMS4yMEMxOTYuMTMgMjAxLjIwIDIwNi41MSAyMTEuNjUgMjA2LjUxIDIyNS4wNkMyMDYuNTEgMjM4LjUzIDE5Ni4wNiAyNDguOTIgMTgyLjA2IDI0OC45MkMxNjcuOTMgMjQ4LjkyIDE1Ny42MSAyMzguNjYgMTU3LjYxIDIyNS4wNiIvPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yMDYuNTEgMjUzLjQ1QzIwNi41MSAyNTcuNDUgMjAzLjI3IDI2MC42OSAxOTkuMjcgMjYwLjY5QzE5NS4yNyAyNjAuNjkgMTkyLjAzIDI1Ny40NSAxOTIuMDMgMjUzLjQ1QzE5Mi4wMyAyNDkuNDUgMTk1LjI3IDI0Ni4yMSAxOTkuMjcgMjQ2LjIxQzIwMy4yNyAyNDYuMjEgMjA2LjUxIDI0OS40NSAyMDYuNTEgMjUzLjQ1Ii8+PC9zdmc+" alt="Aquabloco" width="826" height="127"></h1>
+    <p class="capa-cta">Garanta já o seu Aquabloco e cuide da saúde dos seus peixes.</p>
+    <a class="btn" href="#aq-comprar">Comprar agora</a>
+  </div>
+  <div class="capa-img">
+    <div class="selo-capa" role="img" aria-label="Tecnologia de liberação múltipla"><span>Tecnologia de</span><b class="txt">liberação múltipla</b></div>
+    <picture><source media="(max-width:760px)" srcset="img/capa-celular.webp" width="720" height="540"><img src="img/capa.webp" srcset="img/capa-1280.webp 1280w, img/capa.webp 1600w" sizes="64vw" alt="Bloco de Aquabloco na rede mergulhado na água do tanque" width="1800" height="1200" fetchpriority="high"></picture>
+  </div>
+</section>
+
+<!-- ===== A NATUREZA A SEU FAVOR (beneficios em volta do bloco) ===== -->
+<section class="sec tec" aria-labelledby="tec-titulo">
+  <div class="wrap">
+    <div class="tec-cab">
+      <h2 class="sec-titulo" id="tec-titulo">A natureza a seu favor</h2>
+      <p>Formulado com a mais alta tecnologia, o Aquabloco combina microencapsulados, ácidos orgânicos, óleos essenciais, vitaminas, probióticos, sais minerais e aromatizantes de alta qualidade.</p>
+    </div>
+    <div class="orbita">
+      <ul class="esq">
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Imunomodulação</span></li>
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Maior desempenho</span></li>
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Melhor conversão alimentar</span></li>
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Aumento de resistência a patógenos</span></li>
+      </ul>
+      <div class="centro">
+        <svg class="anel" viewBox="0 0 400 400" aria-hidden="true">
+          <defs><path id="aq-circulo" d="M16 200a184 184 0 1 1 368 0a184 184 0 1 1-368 0"/></defs>
+          <text><textPath href="#aq-circulo" textLength="1146" lengthAdjust="spacing">TECNOLOGIA SEGURA E EFICIENTE PARA PEIXES • TECNOLOGIA SEGURA E EFICIENTE PARA PEIXES •</textPath></text>
+        </svg>
+        <div class="disco"><img src="img/bloco_rede.webp" alt="Tecnologia segura e eficiente para peixes: bloco de Aquabloco na rede" loading="lazy" decoding="async"></div>
+      </div>
+      <ul class="dir">
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Melhoria do bem-estar animal</span></li>
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Redução de mortalidade</span></li>
+        <li><span class="ck"><svg><use href="#i-ck"/></svg></span><span>Promoção da saúde</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPRA ===== -->
+<section class="sec sec-claro" id="aq-comprar" aria-labelledby="compra-titulo">
+  <div class="wrap compra-grid">
+    <div class="compra-img"><img src="img/caixa_blocos.webp" alt="Caixas do Aquabloco com blocos na rede" loading="lazy" decoding="async"></div>
+
+    <div class="compra-painel">
+      <div class="compra-cab">
+        <h2 id="compra-titulo"><img class="compra-logo" src="img/aquabloco_cor.svg" alt="Aquabloco" loading="lazy" decoding="async"></h2>
+        <p>Suplemento Alimentar em Bloco · Caixa com 6 blocos de 2 kg</p>
+      </div>
+
+      <p class="compra-cta">Compre agora mesmo e leve mais saúde aos seus peixes.</p>
+
+      <div class="compra-acao">
+        <button type="button" class="btn btn-compra" id="comprar" data-loja="https://loja.safeeds.com.br/piscicultura/suplementos/aquabloco"><span>Comprar agora</span></button>
+        <p class="pagto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="2.4" y="5.2" width="19.2" height="13.6" rx="2.6"></rect><path d="M2.4 9.8h19.2"></path><path d="M6 14.6h3.4"></path></svg>Boleto, Pix ou cartão de crédito.</p>
+        <button type="button" class="btn-especialista" id="especialista">Prefiro falar com um especialista</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESAFIOS DA AQUACULTURA (cartoes) ===== -->
+<section class="sec etapas" aria-labelledby="etapas-titulo">
+  <div class="wrap">
+    <div class="etapas-cab">
+      <h2 class="sec-titulo" id="etapas-titulo">Supere os principais desafios da aquacultura</h2>
+      <p>O Aquabloco é seu aliado estratégico na superação dos desafios de manejo na aquacultura, melhorando o ambiente aquático, facilitando um manejo mais eficaz e alcançando resultados superiores. O formato em bloco possibilita sua aplicação em:</p>
+    </div>
+    <div class="etapas-grid">
+      <article class="etapa">
+        <div class="etapa-foto"><img src="img/etapa_tanques_rede.webp" alt="Tanques-rede em açude, com barco de manejo" loading="lazy" decoding="async" width="900" height="600"></div>
+        <div class="etapa-txt"><h3>Tanques-rede</h3></div>
+      </article>
+      <article class="etapa">
+        <div class="etapa-foto"><img src="img/etapa_juvenis.webp" alt="Cardume de peixes juvenis" loading="lazy" decoding="async" width="900" height="600"></div>
+        <div class="etapa-txt"><h3>Juvenis</h3></div>
+      </article>
+      <article class="etapa">
+        <div class="etapa-foto"><img src="img/etapa_tanques.webp" alt="Tilápias em volta do bloco de Aquabloco dentro do tanque" loading="lazy" decoding="async" width="900" height="600"></div>
+        <div class="etapa-txt"><h3>Tanques de variados formatos</h3></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECNOLOGIA DE LIBERACAO MULTIPLA ===== -->
+<section class="sec sec-claro" aria-labelledby="lib-titulo">
+  <div class="wrap lib-grid">
+    <div class="lib-txt">
+      <p class="lib-rot">Tecnologia exclusiva Safeeds</p>
+      <h2 class="sec-titulo" id="lib-titulo">Tecnologia de liberação múltipla</h2>
+      <p>A tecnologia do Aquabloco permite liberação precisa, controlada e direcionada dos compostos ativos.</p>
+    </div>
+    <figure class="lib-fig"><img src="img/peixe_liberacao.svg" alt="Ilustração de um peixe com a liberação em duas fases: 1ª fase nas brânquias e 2ª fase no intestino" width="684" height="409" loading="lazy" decoding="async"></figure>
+  </div>
+</section>
+
+<!-- ===== PERGUNTAS FREQUENTES ===== -->
+<section class="sec faq" aria-labelledby="faq-titulo">
+  <div class="wrap faq-grid">
+    <h2 class="sec-titulo" id="faq-titulo">Perguntas frequentes</h2>
+    <div class="faq-lista">
+      <details open>
+        <summary><span>O que é o Aquabloco?</span><span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="resp"><p><b>Aquabloco</b> é um produto inovador da Safeeds, desenvolvido para enfrentar os principais desafios da aquacultura brasileira. Ele utiliza uma tecnologia avançada de produção para garantir uma liberação controlada e uniforme dos seus componentes em ambiente aquático.</p><p>Para mais informações, fale com a equipe técnica da Safeeds ou acesse <a href="http://www.safeeds.com.br" target="_blank" rel="noopener">safeeds.com.br</a>.</p></div>
+      </details>
+      <details>
+        <summary><span>O que vem na caixa?</span><span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="resp"><p>Cada caixa traz <b>6 blocos de 2 kg</b>, somando 12 kg.</p></div>
+      </details>
+      <details>
+        <summary><span>Como posso pagar?</span><span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="resp"><p>Na loja Safeeds você paga com <b>boleto</b>, <b>Pix</b> ou <b>cartão de crédito</b> (Visa, Mastercard, Elo, American Express e Diners). A forma de pagamento é escolhida na última etapa, depois de confirmar endereço e frete.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUTOS SIMILARES ===== -->
+<section class="sec sec-claro similares" aria-labelledby="sim-titulo">
+  <div class="wrap">
+    <h2 class="sec-titulo" id="sim-titulo">Produtos similares</h2>
+    <div class="cards">
+      <a class="card" href="https://loja.safeeds.com.br/piscicultura/saude-intestinal/enterifin-alevino-regulador-de-acidez-10-kg" target="_blank" rel="noopener">
+        <span class="card-foto"><img src="img/rel_enterifin_alevino.webp" alt="Embalagem do Enterifin Alevino" loading="lazy" decoding="async"></span>
+        <h3>Enterifin Microencapsulado para Alevino Caixa 10 Kg</h3>
+        <span class="card-btn">Comprar</span>
+      </a>
+      <a class="card" href="https://safeeds.ind.br/safetoxplus/" target="_blank" rel="noopener">
+        <span class="card-foto"><img src="img/rel_safetox_plus.webp" alt="Embalagem do Safetox Plus" loading="lazy" decoding="async"></span>
+        <h3>Safetox Plus Adsorvente de Micotoxinas</h3>
+        <span class="card-btn">Comprar</span>
+      </a>
+      <a class="card" href="https://loja.safeeds.com.br/ruminantes/conservantes/bactodry-eco-conservante-em-po-20-kg" target="_blank" rel="noopener">
+        <span class="card-foto"><img src="img/rel_bactodry_saco.webp" alt="Embalagem do Bactodry-Eco" loading="lazy" decoding="async"></span>
+        <h3>Bactodry-Eco Conservante em Pó 20 Kg</h3>
+        <span class="card-btn">Comprar</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== RODAPE ===== -->
+<footer class="rodape">
+  <div class="wrap">
+    <div class="rod-grid">
+      <div class="rod-marca">
+        <img src="img/logo_safeeds_vertical.webp" alt="Safeeds, aditivos para nutrição animal" loading="lazy" decoding="async">
+      </div>
+      <div>
+        <h4>Piscicultura</h4>
+        <ul>
+          <li><a href="https://loja.safeeds.com.br/piscicultura/suplementos/aquabloco" target="_blank" rel="noopener">Aquabloco</a></li>
+          <li><a href="https://loja.safeeds.com.br/piscicultura/saude-intestinal/enterifin-alevino-regulador-de-acidez-10-kg" target="_blank" rel="noopener">Enterifin Alevino</a></li>
+          <li><a href="https://loja.safeeds.com.br/aves/adsorventes/safetox-plus" target="_blank" rel="noopener">Safetox Plus</a></li>
+          <li><a href="https://loja.safeeds.com.br/ruminantes/conservantes/bactodry-eco-conservante-em-po-20-kg" target="_blank" rel="noopener">Bactodry-Eco</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Informações</h4>
+        <ul>
+          <li><a href="https://safeeds.com.br" target="_blank" rel="noopener">safeeds.com.br</a></li>
+          <li><a href="https://loja.safeeds.com.br" target="_blank" rel="noopener">Loja Safeeds</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Suporte</h4>
+        <ul>
+          <li><a class="rod-social" href="https://api.whatsapp.com/send?phone=554591330523&text=Quero%20saber%20mais%20sobre%20o%20Aquabloco" target="_blank" rel="noopener" aria-label="WhatsApp (45) 99133-0523"><svg class="rod-ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-zap"/></svg><span>(45) 99133-0523</span></a></li>
+          <li><a class="rod-social" href="https://www.instagram.com/safeedsnutricaoanimal/" target="_blank" rel="noopener" aria-label="Instagram @safeedsnutricaoanimal"><svg class="rod-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg><span>@safeedsnutricaoanimal</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">©2026 Todos os direitos reservados. Aquabloco é um produto da Safeeds Nutrição Animal®. Consulte um técnico para obter informações sobre o produto. Imagens meramente ilustrativas. <a href="#politica" data-politica>Política de privacidade e cookies</a> · <button type="button" class="rod-cookies" id="rod-cookies">Preferências de cookies</button></p>
+  </div>
+</footer>
+
+<!-- ===== AVISO DE COOKIES ===== -->
+<div class="cookies" id="cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies para medir a navegação e melhorar nossos anúncios. <a href="#politica" data-politica>Política de privacidade</a>.</p>
+  <div class="cookies-acoes">
+    <button type="button" class="cookies-recusar" id="cookies-recusar">Recusar</button>
+    <button type="button" class="cookies-aceitar" id="cookies-aceitar">Ok, entendi</button>
+  </div>
+</div>
+
+<!-- ===== POLITICA DE PRIVACIDADE E COOKIES ===== -->
+<dialog class="pc politica" id="politica" aria-labelledby="pol-titulo">
+  <div class="saida-topo">
+    <img class="saida-logo" id="pol-logo" alt="Safeeds">
+    <button type="button" class="pc-fechar" id="pol-fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="pol-corpo">
+    <h2 id="pol-titulo">Política de privacidade e cookies</h2>
+    <p>Esta política vale para esta página do Aquabloco, mantida pela Safeeds Nutrição Animal. A política geral da empresa está em <a href="https://www.safeeds.com.br/" target="_blank" rel="noopener">safeeds.com.br</a>.</p>
+    <h3>Dados que você informa</h3>
+    <ul>
+      <li>No pré-cadastro da compra: nome, e-mail, WhatsApp, perfil, cidade, estado e o pedido escolhido (quantidade e valor).</li>
+      <li>No cadastro do desconto: nome, cidade e WhatsApp.</li>
+    </ul>
+    <p>Usamos esses dados só para entrar em contato sobre o seu pedido, sobre o desconto e sobre os produtos da Safeeds. Eles ficam guardados numa planilha de acesso restrito da equipe da Safeeds e não são vendidos nem compartilhados com terceiros, exceto quando a lei exigir. O pagamento e a entrega são feitos na loja Safeeds, que tem as próprias regras.</p>
+    <h3>Cookies e medição</h3>
+    <ul>
+      <li><b>Meta Pixel (via Google Tag Manager):</b> mede visitas, cadastros e a ida para o checkout, para avaliar e melhorar nossos anúncios no Facebook e no Instagram.</li>
+      <li><b>Microsoft Clarity (via Google Tag Manager):</b> registra de forma anônima como a página é usada (cliques, rolagem, mapas de calor) para melhorarmos o conteúdo. Os campos dos formulários ficam mascarados.</li>
+    </ul>
+    <p>Esses recursos ficam ativos enquanto você navega. Se clicar em <b>Recusar</b>, eles são desligados e a página funciona normalmente. Você pode mudar a escolha a qualquer momento em <b>Preferências de cookies</b>, no rodapé.</p>
+    <h3>Seus direitos</h3>
+    <p>Pela LGPD (Lei 13.709/2018) você pode pedir acesso, correção ou exclusão dos seus dados e retirar o consentimento. Fale com a gente pelo WhatsApp <a href="https://api.whatsapp.com/send?phone=554591330523&text=Quero%20saber%20mais%20sobre%20o%20Aquabloco" target="_blank" rel="noopener">(45) 99133-0523</a>.</p>
+    <p class="pol-data">Atualizada em setembro de 2026.</p>
+  </div>
+</dialog>
+
+<a class="zap" id="zap" href="https://api.whatsapp.com/send?phone=554591330523&text=Quero%20saber%20mais%20sobre%20o%20Aquabloco" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg><use href="#i-zap"/></svg></a>
+
+<!-- ===== PRE-CHECKOUT ===== -->
+<dialog class="pc" id="pre-checkout" aria-labelledby="pc-titulo">
+  <form id="pc-form" novalidate>
+    <div class="pc-topo">
+      <img id="pc-img" alt="">
+      <div><span class="qtd" id="pc-qtd">Aquabloco</span><span class="val num" id="pc-val"></span></div>
+      <button type="button" class="pc-fechar" id="pc-fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="pc-corpo">
+      <div>
+        <h2 id="pc-titulo">Fale com um especialista</h2>
+        <p class="pc-sub">São três campos. Em seguida você conversa pelo WhatsApp com a nossa equipe, que tira suas dúvidas sobre o Aquabloco.</p>
+      </div>
+      <div class="pc-campos">
+        <div class="campo largo"><label for="pc-nome">Nome completo</label>
+          <input id="pc-nome" name="nome" type="text" autocomplete="name">
+          <span class="erro" id="pc-nome-erro"></span></div>
+        <div class="campo"><label for="pc-email">E-mail</label>
+          <input id="pc-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@email.com">
+          <span class="erro" id="pc-email-erro"></span></div>
+        <div class="campo"><label for="pc-whatsapp">WhatsApp</label>
+          <input id="pc-whatsapp" name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" placeholder="(45) 99999-9999">
+          <span class="erro" id="pc-whatsapp-erro"></span></div>
+        <div class="campo largo"><label for="pc-perfil">Você é <span class="opc">(opcional)</span></label>
+          <select id="pc-perfil" name="perfil" data-opcional>
+            <option value="">Selecione</option>
+            <option>Produtor rural</option>
+            <option>Nutricionista ou consultor</option>
+            <option>Revenda</option>
+            <option>Outro</option>
+          </select>
+          <span class="erro" id="pc-perfil-erro"></span></div>
+        <div class="campo"><label for="pc-cidade">Cidade <span class="opc">(opcional)</span></label>
+          <input id="pc-cidade" name="cidade" type="text" autocomplete="address-level2" data-opcional>
+          <span class="erro" id="pc-cidade-erro"></span></div>
+        <div class="campo"><label for="pc-uf">Estado <span class="opc">(opcional)</span></label>
+          <select id="pc-uf" name="uf" autocomplete="address-level1" data-opcional>
+            <option value="">UF</option>
+            <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option>
+            <option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option>
+            <option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option>
+            <option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+          </select>
+          <span class="erro" id="pc-uf-erro"></span></div>
+      </div>
+      <input class="hp" type="text" id="pc-hp" tabindex="-1" autocomplete="one-time-code" data-lpignore="true" aria-hidden="true">
+      <p class="pc-aviso" id="pc-aviso" role="status" hidden></p>
+    </div>
+    <div class="pc-acao">
+      <button class="btn" type="submit" id="pc-enviar">Falar no WhatsApp</button>
+      <p class="pc-lgpd">Ao continuar, você autoriza a Safeeds a falar com você sobre este pedido e sobre seus produtos, conforme a LGPD e a <a href="#politica" data-politica>política de privacidade</a>.</p>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===== POP-UP DE SAIDA (desconto) ===== -->
+<dialog class="pc saida" id="saida" aria-labelledby="sd-titulo">
+  <form id="sd-form" novalidate>
+    <div class="saida-topo">
+      <img class="saida-logo" id="sd-logo" alt="Aquabloco">
+      <button type="button" class="pc-fechar" id="sd-fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="pc-corpo" id="sd-corpo">
+      <div>
+        <h2 id="sd-titulo">Tem certeza que vai sair?</h2>
+        <p class="pc-sub">Garanta agora mesmo <b>até 80% de desconto</b>. Deixe seus dados e nossa equipe entra em contato pelo WhatsApp.</p>
+      </div>
+      <div class="pc-campos">
+        <div class="campo largo"><label for="sd-nome">Nome completo</label>
+          <input id="sd-nome" name="nome" type="text" autocomplete="name">
+          <span class="erro" id="sd-nome-erro"></span></div>
+        <div class="campo"><label for="sd-cidade">Cidade</label>
+          <input id="sd-cidade" name="cidade" type="text" autocomplete="address-level2">
+          <span class="erro" id="sd-cidade-erro"></span></div>
+        <div class="campo"><label for="sd-whatsapp">Telefone (WhatsApp)</label>
+          <input id="sd-whatsapp" name="whatsapp" type="tel" autocomplete="tel-national" inputmode="numeric" placeholder="(45) 99999-9999">
+          <span class="erro" id="sd-whatsapp-erro"></span></div>
+      </div>
+      <input class="hp" type="text" id="sd-hp" tabindex="-1" autocomplete="one-time-code" data-lpignore="true" aria-hidden="true">
+      <div>
+        <label class="aceite" for="sd-aceite"><input type="checkbox" id="sd-aceite" name="consentimento" value="sim">
+          <span>Autorizo a Safeeds a entrar em contato sobre o desconto e sobre seus produtos, conforme a LGPD.</span></label>
+        <span class="erro" id="sd-aceite-erro"></span>
+      </div>
+      <p class="pc-aviso" id="sd-aviso" role="alert" hidden></p>
+      <button class="btn" type="submit" id="sd-enviar">Quero meu desconto</button>
+      <button type="button" class="saida-nao" id="sd-sair">Não, obrigado</button>
+    </div>
+    <div class="pc-corpo" id="sd-ok" role="status" hidden>
+      <div>
+        <h2>Cadastro recebido<span id="sd-ok-nome"></span></h2>
+        <p class="pc-sub">Nossa equipe vai entrar em contato pelo WhatsApp. Para garantir o desconto, crie também sua conta na loja Safeeds.</p>
+      </div>
+      <a class="btn" href="https://loja.safeeds.com.br/cadastro" target="_blank" rel="noopener">Criar minha conta na loja</a>
+      <button type="button" class="saida-nao" id="sd-ok-fechar">Voltar para a página</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+  // Preco na loja: nao aparece na tela, so vai no valor do evento de medicao.
+  var PRECO_UN = 720.84, BLOCOS_UN = 6;
+  function brl(v){ var p = v.toFixed(2).split('.'); return 'R$ ' + p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + p[1]; }
+
+  // ---------- WhatsApp flutuante: some sobre a compra e o rodape ----------
+  var zap = document.getElementById('zap');
+  if('IntersectionObserver' in window){
+    var visiveis = [];
+    var io = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        var i = visiveis.indexOf(e.target);
+        if(e.isIntersecting && i < 0) visiveis.push(e.target);
+        if(!e.isIntersecting && i >= 0) visiveis.splice(i, 1);
+      });
+      zap.classList.toggle('oculto', visiveis.length > 0);
+    }, {threshold:0.12});
+    io.observe(document.getElementById('aq-comprar'));
+    io.observe(document.querySelector('.rodape'));
+  }
+
+  // ---------- pre-checkout ----------
+  // URL /exec do Apps Script que grava cada cadastro numa linha da planilha. Vazio = modo de demonstracao.
+  var ENDPOINT_PLANILHA = 'https://script.google.com/macros/s/AKfycbx1UPxhoJpjpNgnmM88lOSSIIdpmekAJjnW8p1-nwHjPGQXvB75qevf8BmbWWySLnfd/exec';
+  var PRODUTO = 'Aquabloco';
+  var dlg = document.getElementById('pre-checkout');
+  var form = document.getElementById('pc-form');
+  var comprar = document.getElementById('comprar');
+  var enviar = document.getElementById('pc-enviar');
+  var aviso = document.getElementById('pc-aviso');
+  function $(id){ return document.getElementById(id); }
+  function soDigitos(v){ return (v||'').replace(/\D/g,''); }
+
+  function planoAtual(){ return {qtd:'1', rotulo:'1 caixa', preco:brl(PRECO_UN)}; }
+  function abrir(){
+    var p = planoAtual();
+    $('pc-qtd').textContent = PRODUTO;
+    $('pc-val').textContent = '';   // sem valor na tela
+    aviso.hidden = true;
+    enviar.disabled = false; enviar.textContent = 'Falar no WhatsApp';
+    dlg.showModal();
+    setTimeout(function(){ $('pc-nome').focus(); }, 60);
+  }
+  // 09/10/2026: "Comprar agora" (capa, compra e barra fixa) vai DIRETO ao carrinho da loja com 1 unidade,
+  // avisando antes o GTM (click_checkout_aquabloco, lp_origem 'direto'), sem pedir dados.
+  var indoLoja = false;
+  comprar.addEventListener('click', function(){
+    if(indoLoja) return;
+    indoLoja = true; setTimeout(function(){ indoLoja = false; }, 3000);
+    var p = planoAtual();
+    avisaGTM(p, function(){ irDireto(p.qtd); }, 'direto');
+  });
+  // "Prefiro falar com um especialista": formulario (planilha + Lead) e depois o WhatsApp
+  $('especialista').addEventListener('click', function(){
+    // navegador sem suporte a <dialog>: abre o WhatsApp direto
+    if(typeof dlg.showModal !== 'function'){ window.location.href = 'https://api.whatsapp.com/send?phone=554591330523'; return; }
+    abrir();
+  });
+  $('pc-fechar').addEventListener('click', function(){ dlg.close(); });
+  // o "Comprar agora" da abertura abre o formulario direto, em vez de rolar ate a compra
+  var compraCapa = document.querySelector('.capa .btn[href="#aq-comprar"]');
+  if(compraCapa) compraCapa.addEventListener('click', function(e){ e.preventDefault(); comprar.click(); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  if(location.hash === '#pre-checkout' && typeof dlg.showModal === 'function') abrir();
+
+  // mascara do WhatsApp (pre-checkout e pop-up de saida)
+  function mascaraZap(el){
+    el.addEventListener('input', function(){
+      var d = soDigitos(this.value).slice(0,11), f = d;
+      if(d.length > 2) f = '(' + d.slice(0,2) + ') ' + d.slice(2);
+      if(d.length > 6) f = '(' + d.slice(0,2) + ') ' + d.slice(2, d.length === 11 ? 7 : 6) + '-' + d.slice(d.length === 11 ? 7 : 6);
+      this.value = f;
+    });
+  }
+  mascaraZap($('pc-whatsapp'));
+
+  // Validacao dos formularios; p = prefixo dos ids ('pc' no pre-checkout, 'sd' no pop-up de saida).
+  function criaValidador(p){
+    var regras = {}, todas = {};
+    todas[p + '-nome']     = function(v){ return v.trim().split(/\s+/).length >= 2 ? '' : 'Informe nome e sobrenome.'; };
+    todas[p + '-email']    = function(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v.trim()) ? '' : 'Confira o e-mail, ele precisa ter @ e domínio.'; };
+    todas[p + '-whatsapp'] = function(v){ var d=soDigitos(v); return (d.length===10||d.length===11) ? '' : 'Informe o WhatsApp com DDD.'; };
+    todas[p + '-perfil']   = function(v){ return v ? '' : 'Escolha uma opção.'; };
+    todas[p + '-cidade']   = function(v){ return v.trim().length >= 2 ? '' : 'Informe a cidade.'; };
+    todas[p + '-uf']       = function(v){ return v ? '' : 'Escolha o estado.'; };
+    // valida so o que existe no formulario e nao esta marcado como opcional
+    for(var k in todas){ if($(k) && !$(k).hasAttribute('data-opcional')) regras[k] = todas[k]; }
+    function validar(){
+      var primeiro = null;
+      for(var id in regras){
+        var el = $(id), msg = regras[id](el.value), box = el.closest('.campo');
+        $(id + '-erro').textContent = msg;
+        if(msg){ box.setAttribute('data-erro',''); el.setAttribute('aria-invalid','true'); if(!primeiro) primeiro = el; }
+        else { box.removeAttribute('data-erro'); el.removeAttribute('aria-invalid'); }
+      }
+      var caixa = $(p + '-aceite');                 // o pre-checkout nao tem mais caixa de aceite
+      var ok = !caixa || caixa.checked;
+      if(caixa) $(p + '-aceite-erro').textContent = ok ? '' : 'Marque a autorização para continuar.';
+      if(!ok && !primeiro) primeiro = caixa;
+      if(primeiro) primeiro.focus();
+      return !primeiro;
+    }
+    for(var id in regras){ (function(i){ $(i).addEventListener('change', function(){
+      if($(i).closest('.campo').hasAttribute('data-erro')) validar();
+    }); })(id); }
+    return validar;
+  }
+  var validar = criaValidador('pc');
+
+  // Link da Tray que coloca o Aquabloco (IdProd 1) no carrinho com a quantidade e abre o checkout.
+  var URL_CARRINHO = 'https://loja.safeeds.com.br/loja/cartService.php?loja=1445119&acao=incluir&IdProd=1&quant=';
+
+  // 09/10/2026: utm_* e fbclid da landing page seguem para a loja junto com o carrinho.
+  // Guardados na chegada (sessionStorage) para nao se perderem se a pessoa navegar pelas ancoras.
+  var PARAMS_LOJA = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', '_gl'];
+  var CHAVE_PARAMS = 'lp-params-loja';
+  function paramsDaUrl(){
+    var achou = {}, tem = false;
+    try {
+      var q = new URLSearchParams(location.search);
+      PARAMS_LOJA.forEach(function(k){ var v = q.get(k); if(v){ achou[k] = v.slice(0, 300); tem = true; } });
+    } catch(e){}
+    return tem ? achou : null;
+  }
+  (function(){ var a = paramsDaUrl(); if(a){ try { sessionStorage.setItem(CHAVE_PARAMS, JSON.stringify(a)); } catch(e){} } })();
+  function paramsLoja(){
+    var dados = paramsDaUrl();
+    if(!dados){ try { dados = JSON.parse(sessionStorage.getItem(CHAVE_PARAMS) || 'null'); } catch(e){} }
+    var partes = [];
+    if(dados) PARAMS_LOJA.forEach(function(k){ if(dados[k]) partes.push(k + '=' + encodeURIComponent(dados[k])); });
+    return partes.length ? '&' + partes.join('&') : '';
+  }
+  // abre a loja por um link de verdade (<a> + clique), para o GA4 poder decorar com o _gl (dominio cruzado)
+  function abreLink(url, novaAba){
+    var a = document.createElement('a');
+    a.href = url; a.rel = 'noopener'; a.style.display = 'none';
+    if(novaAba) a.target = '_blank';
+    document.body.appendChild(a);
+    try { a.dispatchEvent(new MouseEvent('mousedown', {bubbles: true, cancelable: true, view: window})); } catch(e){}
+    a.click();
+    setTimeout(function(){ if(a.parentNode) a.parentNode.removeChild(a); }, 1500);
+  }
+  // ida direta ao carrinho (sem formulario), com os parametros da campanha
+  function irDireto(qtd){
+    var url = URL_CARRINHO + encodeURIComponent(qtd) + paramsLoja();
+    abreLink(url, window.top !== window.self);   // dentro de visualizador/iframe: nova aba
+  }
+
+  // Envia o cadastro para a planilha sem esperar resposta; keepalive garante a saida
+  // mesmo com a pagina indo para o checkout no mesmo instante.
+  // Devolve uma Promise: rejeita quando a conexao e bloqueada (ex.: pagina dentro de um visualizador) ou sem internet.
+  function enviarPlanilha(campos){
+    if(!ENDPOINT_PLANILHA){ console.warn('Planilha nao configurada: cadastro nao salvo.'); return Promise.reject(new Error('sem endereco da planilha')); }
+    var corpo = new URLSearchParams(campos);
+    try {
+      return fetch(ENDPOINT_PLANILHA, {method:'POST', body:corpo, mode:'no-cors', keepalive:true, credentials:'omit'});
+    } catch(e){
+      if(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT_PLANILHA, corpo)) return Promise.resolve();
+      return Promise.reject(e);
+    }
+  }
+
+  // Abre o checkout na hora do clique.
+  function irParaLoja(qtd){
+    var url = URL_CARRINHO + encodeURIComponent(qtd) + paramsLoja();
+    enviar.textContent = 'Abrindo o checkout...';
+    if(window.top !== window){ window.open(url, '_blank'); }   // pagina dentro de visualizador/iframe
+    else { window.location.href = url; }
+    setTimeout(function(){
+      aviso.innerHTML = 'O checkout não abriu? <a href="' + url + '" target="_blank" rel="noopener">Clique aqui para abrir</a>.';
+      aviso.hidden = false;
+      enviar.disabled = false; enviar.textContent = 'Falar no WhatsApp';
+    }, 3000);
+  }
+
+  // Avisa o GTM que a pessoa vai para o checkout (tags Meta | Lead e Meta | ClickCheckout)
+  // e so depois segue. Espera no maximo 700 ms pelas tags; sem GTM na pagina, segue na hora.
+  function avisaGTM(p, depois, origem){
+    var feito = false;
+    function segue(){ if(!feito){ feito = true; depois(); } }
+    var valor = parseFloat(String(p.preco).replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'click_checkout_aquabloco',
+        lp_produto: 'Aquabloco', lp_id_produto: '1', lp_origem: origem || 'pre-checkout',
+        lp_quantidade: Number(p.qtd) || 1, lp_valor: valor, lp_moeda: 'BRL',
+        eventCallback: function(){ setTimeout(segue, 150); }, eventTimeout: 700
+      });
+    } catch(e){}
+    if(!window.google_tag_manager) segue();   // GTM ausente ou bloqueado: nao atrasa
+    else setTimeout(segue, 900);              // trava de seguranca
+  }
+
+  // 09/10/2026: "Prefiro falar com um especialista": depois do cadastro abre o WhatsApp do
+  // Marketing Safeeds (+55 45 9133-0523) com a mensagem pronta. Na medicao vai so o Lead.
+  var ZAP_FONE = '554591330523';
+  function irParaZap(nome){
+    var msg = 'Olá, sou ' + nome + '. Vim pela página do Aquabloco e quero falar com um especialista sobre o Aquabloco.';
+    var url = 'https://api.whatsapp.com/send?phone=' + ZAP_FONE + '&text=' + encodeURIComponent(msg);
+    enviar.textContent = 'Abrindo o WhatsApp...';
+    if(window.top !== window.self){ window.open(url, '_blank'); }   // pagina dentro de visualizador/iframe
+    else { window.location.href = url; }
+    setTimeout(function(){
+      aviso.innerHTML = 'O WhatsApp não abriu? <a href="' + url + '" target="_blank" rel="noopener">Clique aqui para abrir</a>.';
+      aviso.hidden = false;
+      enviar.disabled = false; enviar.textContent = 'Falar no WhatsApp';
+    }, 3000);
+  }
+  // Avisa o GTM (tag Meta | Lead) e so depois segue; sem dados pessoais no dataLayer.
+  function avisaLead(depois){
+    var feito = false;
+    function segue(){ if(!feito){ feito = true; depois(); } }
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_form_aquabloco',
+        lp_produto: 'Aquabloco', lp_id_produto: '1', lp_origem: 'especialista', lp_quantidade: 1,
+        lp_valor: PRECO_UN, lp_moeda: 'BRL',
+        eventCallback: function(){ setTimeout(segue, 150); }, eventTimeout: 700
+      });
+    } catch(e){}
+    if(!window.google_tag_manager) segue();
+    else setTimeout(segue, 900);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var p = planoAtual();
+    var suspeito = $('pc-hp').value ? '[verificar] ' : '';   // isca preenchida: grava, mas marca a linha
+    if(!validar()) return;
+
+    enviar.disabled = true;
+    enviarPlanilha({
+      produto: 'Aquabloco',
+      nome: $('pc-nome').value.trim().replace(/\s+/g, ' '), email: $('pc-email').value.trim(),
+      whatsapp: $('pc-whatsapp').value, cidade: $('pc-cidade').value.trim(), uf: $('pc-uf').value,
+      perfil: $('pc-perfil').value, quantidade: suspeito + p.rotulo + ' de ' + PRODUTO, valor: p.preco, pagina: location.href.split('#')[0]
+    }).catch(function(){});
+    var nome = $('pc-nome').value.trim().replace(/\s+/g, ' ');
+    avisaLead(function(){ irParaZap(nome); });
+  });
+  // ---------- pop-up de saida (desconto) ----------
+  // O navegador nao permite personalizar o aviso de fechar a aba; este pop-up abre na intencao de saida.
+  var saida = $('saida'), sdForm = $('sd-form'), validarSaida = criaValidador('sd');
+  $('sd-logo').src = document.querySelector('.compra-logo').src;   // logo colorido da compra (o da abertura tem o "aqua" branco)
+  $('pc-img').src = document.querySelector('.compra-img img').src;
+  mascaraZap($('sd-whatsapp'));
+  var CHAVE_SAIDA = 'aq-saida-vista', armado = false;
+  setTimeout(function(){ armado = true; }, 8000);             // nunca nos primeiros 8 s
+  function saidaVista(){ try { return sessionStorage.getItem(CHAVE_SAIDA) === '1'; } catch(e){ return false; } }
+  function marcaSaida(){ try { sessionStorage.setItem(CHAVE_SAIDA, '1'); } catch(e){} }
+  function abrirSaida(){
+    if(!armado || saidaVista() || typeof saida.showModal !== 'function') return;
+    if(dlg.open || saida.open) return;                         // nao abre por cima do pre-checkout
+    marcaSaida();                                              // uma vez por visita
+    saida.showModal();
+    setTimeout(function(){ $('sd-nome').focus(); }, 60);
+  }
+  // computador: o mouse sai pela parte de cima da janela (rumo as abas ou ao X)
+  document.addEventListener('mouseout', function(e){
+    if(!e.relatedTarget && e.clientY <= 0) abrirSaida();
+  });
+  // celular: depois de ler ~35% da pagina, rolagem rapida para cima
+  var ultimoY = window.scrollY, ultimoT = Date.now(), leu = false;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY, t = Date.now();
+    if(y > document.documentElement.scrollHeight * 0.35) leu = true;
+    var subida = (ultimoY - y) / Math.max(1, t - ultimoT);    // px por ms, para cima
+    if(leu && window.matchMedia('(hover: none)').matches && subida > 1.5) abrirSaida();
+    ultimoY = y; ultimoT = t;
+  }, {passive:true});
+  function fecharSaida(){ saida.close(); }
+  $('sd-fechar').addEventListener('click', fecharSaida);
+  $('sd-sair').addEventListener('click', fecharSaida);
+  $('sd-ok-fechar').addEventListener('click', fecharSaida);
+  saida.addEventListener('click', function(e){ if(e.target === saida) fecharSaida(); });
+  function mostraOkSaida(){
+    var primeiro = $('sd-nome').value.trim().split(/\s+/)[0];
+    $('sd-ok-nome').textContent = primeiro ? ', ' + primeiro : '';
+    $('sd-corpo').hidden = true;
+    $('sd-ok').hidden = false;
+  }
+  sdForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var suspeitoSd = $('sd-hp').value ? '[verificar] ' : '';  // isca preenchida: grava, mas marca a linha
+    if(!validarSaida()) return;
+    // avisa o GTM (tag Meta | Lead); sem dados pessoais
+    try { window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'lead_popup_aquabloco',
+      lp_produto: 'Aquabloco', lp_id_produto: '1', lp_origem: 'popup-saida', lp_quantidade: 0, lp_valor: 0, lp_moeda: 'BRL' }); } catch(e){}
+    var botao = $('sd-enviar'), aviso = $('sd-aviso'), resolvido = false;
+    aviso.hidden = true;
+    botao.disabled = true; botao.textContent = 'Enviando...';
+    function deuCerto(){ if(resolvido) return; resolvido = true; mostraOkSaida(); }
+    function falhou(){
+      if(resolvido) return; resolvido = true;
+      aviso.innerHTML = 'Não conseguimos enviar seu cadastro agora. Tente de novo em instantes ou <a href="' + $('zap').href + '" target="_blank" rel="noopener">fale com a gente pelo WhatsApp</a>.';
+      aviso.hidden = false;
+      botao.disabled = false; botao.textContent = 'Quero meu desconto';
+    }
+    enviarPlanilha({
+      produto: 'Aquabloco',
+      nome: $('sd-nome').value.trim().replace(/\s+/g, ' '), email: '',
+      whatsapp: $('sd-whatsapp').value, cidade: $('sd-cidade').value.trim(), uf: '', perfil: '',
+      quantidade: suspeitoSd + 'Pop-up de saída: desconto de até 80%', valor: '', pagina: location.href.split('#')[0]
+    }).then(deuCerto, falhou);
+    // bloqueio falha na hora; se nada falhou em 2,5 s o envio esta seguindo (o Apps Script leva de 2 a 17 s)
+    setTimeout(deuCerto, 2500);
+  });
+  // ---------- aviso de cookies e politica de privacidade ----------
+  var faixa = $('cookies'), politica = $('politica');
+  function mostraFaixa(completo){                        // completo = com o botao Recusar (vem do rodape)
+    faixa.classList.toggle('completo', completo === true);
+    faixa.hidden = false; document.body.classList.add('com-cookies');
+  }
+  function escondeFaixa(){ faixa.hidden = true; document.body.classList.remove('com-cookies'); }
+  if(!window.aqMedicao.escolha()) mostraFaixa();
+  $('cookies-aceitar').addEventListener('click', function(){ window.aqMedicao.aceitar(); escondeFaixa(); });
+  $('cookies-recusar').addEventListener('click', function(){
+    window.aqMedicao.recusar(); escondeFaixa();          // desliga o Pixel e o Clarity sem recarregar
+  });
+  $('rod-cookies').addEventListener('click', function(){ mostraFaixa(true); });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('[data-politica]');
+    if(!a) return;
+    e.preventDefault();
+    if(typeof politica.showModal !== 'function'){ return; }
+    if(!$('pol-logo').getAttribute('src')) $('pol-logo').src = 'img/logo_safeeds.svg';
+    if(!politica.open) politica.showModal();
+  });
+  $('pol-fechar').addEventListener('click', function(){ politica.close(); });
+  politica.addEventListener('click', function(e){ if(e.target === politica) politica.close(); });
+
+  // ---------- links de aba nova com reserva ----------
+  // Dentro de um iframe sem allow-popups (previa do artifact) ou com bloqueador de pop-up, o target="_blank"
+  // nao abre nada. Se a aba nova nao vier, navega na propria aba.
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[target="_blank"][href]');
+    if(!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var url = a.href;
+    if(!/^https?:/i.test(url)) return;
+    e.preventDefault();
+    var nova = null;
+    try { nova = window.open(url, '_blank', 'noopener'); } catch(err){}
+    if(!nova) window.location.href = url;                 // aba nova bloqueada: segue na mesma aba
+  });
+
+
+  // para testar: abrir a pagina com #saida no fim do endereco
+  if(location.hash === '#saida'){ armado = true; abrirSaida(); }
+})();
+</script>
+</body>
+</html>
