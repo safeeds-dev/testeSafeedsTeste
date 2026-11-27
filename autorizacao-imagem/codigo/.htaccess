@@ -1,0 +1,35 @@
+# Sistema de autorizações Safeagro — regras desta pasta apenas.
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Força HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Bloqueia pastas internas e arquivos sensíveis
+  RewriteRule ^(nucleo|dados)(/|$) - [F,L]
+  RewriteRule \.(sqlite[^/]*|db|txt|md|bak|log|ini|swp|orig|zip|gz|tar|sql|journal)$ - [F,L,NC]
+  RewriteRule (~|/error_log)$ - [F,L,NC]
+  RewriteRule ^error_log$ - [F,L,NC]
+</IfModule>
+
+# Arquivos que nunca podem ser baixados: banco, logs (inclusive error_log sem extensão), backups e arquivos ocultos
+<FilesMatch "(^\.|~$|^error_log$|\.(sqlite.*|db|txt|md|bak|log|ini|swp|orig|zip|gz|tar|sql|journal)$)">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always unset X-Powered-By
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set Permissions-Policy "geolocation=(self), camera=(), microphone=(), payment=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+  <FilesMatch "\.(html|js|webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

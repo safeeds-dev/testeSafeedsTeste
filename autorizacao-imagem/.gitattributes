@@ -1,0 +1,5 @@
+# O script de teste roda em bash: manter quebra de linha Unix
+*.sh text eol=lf
+# Fontes e imagens são binários
+*.ttf binary
+*.png binary

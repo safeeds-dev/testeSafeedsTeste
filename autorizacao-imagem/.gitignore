@@ -1,0 +1,15 @@
+# Autorização de imagem — nunca versionar dados, chaves nem token de instalação
+codigo/dados/*
+!codigo/dados/.htaccess
+!codigo/dados/index.html
+codigo/nucleo/local.php
+codigo/nucleo/instalar.txt
+*.sqlite
+*.sqlite-*
+segredo.php
+php-erros.log
+error_log
+
+# Arquivos do Windows
+desktop.ini
+Thumbs.db
