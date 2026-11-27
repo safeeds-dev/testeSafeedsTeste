@@ -1,21 +1,16 @@
 # Autorização de uso de imagem, voz e depoimentos — Safeagro
-### Pacote para validação do TI
-
 **Versão:** 1.1.0 · **Data:** 18/11/2026 · **Responsável pelo pedido:** Marketing (Jonas)
 
 O sistema substitui o Microsoft Forms usado pelos técnicos e vendedores de campo para coletar a autorização de uso de imagem dos produtores. A diferença em relação ao Forms é que o produtor **assina com o dedo na tela do celular**. O sistema também funciona **sem internet** e envia as coletas quando o sinal volta. Os dados pessoais ficam **cifrados** no servidor.
 
 ---
 
-## 1. O que há neste pacote
+## 1. O que há neste repositório
 
 | Pasta / arquivo | Conteúdo |
 |---|---|
 | `codigo/` | Código-fonte completo, exatamente o que vai para o servidor. Não inclui banco, chaves nem token de instalação. |
-| `seguranca/RELATORIO-pentest-16-11-2026.md` | Teste de invasão + auditoria (16/11/2026): achados, evidências e correções sugeridas. |
-| `seguranca/STATUS-CORRECOES.md` | O que foi corrigido e retestado e o que depende de configuração ou decisão. |
-| `seguranca/REVISAO-CODIGO-18-11-2026.md` | Segunda revisão de código (bugs + segurança) e o que foi feito em cada item. |
-| `testes/teste-seguranca.sh` | Script automático (bash + curl) que repete os ataques do pentest contra uma instalação de teste. |
+| `testes/teste-seguranca.sh` | Script automático (bash + curl) que testa as proteções do sistema contra uma instalação de teste. |
 | `testes/COMO-RODAR-LOCAL.md` | Como subir o sistema numa máquina de teste com o servidor embutido do PHP. |
 | `INSTALACAO-PRODUCAO.md` | Passo a passo de publicação na Hostinger e o checklist pós-instalação. |
 

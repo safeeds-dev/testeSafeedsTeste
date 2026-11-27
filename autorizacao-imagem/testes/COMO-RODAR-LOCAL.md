@@ -30,7 +30,7 @@ Com o servidor de teste no ar e **recém-instalado**:
 ```bash
 bash teste-seguranca.sh http://127.0.0.1:8096 token-de-teste-1234567890 ./dados/banco.sqlite
 ```
-O script instala, cria um administrador e um usuário "Consulta" e repete os ataques do pentest. Ele cobre:
+O script instala, cria um administrador e um usuário "Consulta" e testa as proteções do sistema. Ele cobre:
 - permissões por perfil;
 - CSRF/origem;
 - força bruta;
